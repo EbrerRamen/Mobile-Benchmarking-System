@@ -1,0 +1,39 @@
+/* Container for phone details */
+.phone-details-container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: left; /* Ensure text starts from the left side */
+}
+
+/* Phone image styling */
+.phone-details-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Styling for phone basic information */
+.phone-basic-info p {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    text-align: left; /* Ensure text starts from the left side */
+}
+
+/* Styling for phone features list */
+.phone-features li {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    text-align: left; /* Ensure text starts from the left side */
+}
+
+/* Heading for features */
+.phone-features h3 {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    text-align: left; /* Ensure heading is left-aligned */
+}

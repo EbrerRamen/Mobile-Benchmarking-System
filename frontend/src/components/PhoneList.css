@@ -1,0 +1,66 @@
+.phone-list-container {
+    padding: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .phone-item {
+    width: 250px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .phone-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Ensures the image covers the container without distorting */
+    object-position: top; /* Ensures the top part of the image is visible */
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .phone-item-info {
+    margin-bottom: 10px;
+  }
+  
+  .phone-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .edit-button,
+  .delete-button,
+  .view-details-link {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .edit-button {
+    background-color: #3498db;
+  }
+  
+  .delete-button {
+    background-color: #e74c3c;
+  }
+  
+  .view-details-link {
+    background-color: #2ecc71;
+  }
+  

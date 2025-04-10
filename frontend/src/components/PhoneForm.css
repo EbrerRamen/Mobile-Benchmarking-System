@@ -1,0 +1,108 @@
+/* General Container Style for Both Add and Edit Forms */
+.phone-form-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Style */
+.phone-form-header {
+    font-size: 1.8em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Style (Updated for more compact view) */
+.phone-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Label Styling (Adjusted for better spacing) */
+.phone-form label {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+/* Input, Select, and Textarea Styling */
+.phone-form input,
+.phone-form select,
+.phone-form textarea {
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Focus State (For better focus indication) */
+.phone-form input:focus,
+.phone-form select:focus,
+.phone-form textarea:focus {
+    border-color: #007bff;
+}
+
+/* Submit Button Styling */
+.phone-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    grid-column: span 2; /* Spans across both columns for better alignment */
+}
+
+/* Submit Button Hover Effect */
+.phone-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Cancel Button Styling */
+.phone-form .cancel-button {
+    background-color: #ccc;
+    margin-top: 10px;
+    grid-column: span 2; /* Same as submit button */
+}
+
+/* Cancel Button Hover Effect */
+.phone-form .cancel-button:hover {
+    background-color: #999;
+}
+
+/* Textarea Styling */
+.phone-form textarea {
+    resize: vertical;
+    min-height: 100px;
+    grid-column: span 2; /* For the textarea, let it span across both columns */
+}
+
+/* Adjustments for Input Field Types */
+.phone-form input[type="number"],
+.phone-form input[type="text"],
+.phone-form select {
+    width: 100%; /* Ensure input fields span the full width */
+}
+
+/* For ensuring proper spacing on smaller screens */
+@media (max-width: 768px) {
+    .phone-form {
+        grid-template-columns: 1fr; /* Stack inputs in one column for smaller screens */
+    }
+    
+    .phone-form button, .phone-form .cancel-button {
+        grid-column: span 1; /* Let the buttons take up full width */
+    }
+}

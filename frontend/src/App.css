@@ -1,0 +1,186 @@
+/* General App Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #333;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.add-phone-form {
+  margin-bottom: 30px;
+}
+
+/* Phone List Styles */
+.phone-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.phone-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.phone-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.phone-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.phone-card-content {
+  padding: 15px;
+}
+
+.phone-card h3 {
+  font-size: 1.5em;
+  margin: 0;
+  color: #333;
+}
+
+.phone-card p {
+  font-size: 1.1em;
+  color: #666;
+}
+
+/* Add Phone Form Styles */
+.add-phone-form-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.add-phone-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-phone-form-container input,
+.add-phone-form-container select,
+.add-phone-form-container button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.add-phone-form-container button {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.add-phone-form-container button:hover {
+  background-color: #218838;
+}
+
+/* Phone Details Styles */
+.phone-details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.phone-details-container h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.phone-details-container .price {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 20px;
+}
+
+.phone-details-container .specifications {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.phone-details-container .specifications p {
+  margin: 10px 0;
+}
+
+.phone-details-container .specifications strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.phone-details-container .description {
+  font-size: 1em;
+  color: #444;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.phone-details-container .back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.phone-details-container .back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .phone-list-container {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-card h3 {
+    font-size: 1.2em;
+  }
+
+  .phone-details-container {
+    padding: 15px;
+  }
+
+  .add-phone-form-container {
+    padding: 15px;
+  }
+}
