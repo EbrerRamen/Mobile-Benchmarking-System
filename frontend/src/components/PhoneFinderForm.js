@@ -9,7 +9,7 @@ const PhoneFinderForm = ({ isOpen, onClose, onSearch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch({ search, brand, sortOrder });
+    onSearch({ search, brand, sort: sortOrder });
     onClose(); // close the modal after submitting
   };
 
