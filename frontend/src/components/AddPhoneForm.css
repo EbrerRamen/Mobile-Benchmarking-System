@@ -1,0 +1,69 @@
+/* AddPhoneForm.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .phone-form-modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .phone-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .phone-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .phone-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .cancel-button {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  

@@ -1,0 +1,157 @@
+General Layout
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Heading Style */
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Button to trigger modal */
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Box */
+.phone-form-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Modal Header */
+.phone-form-header {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Form Layout */
+.phone-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+}
+
+/* Button Styles */
+button[type="submit"] {
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+button.cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  margin-top: 10px;
+}
+
+button.cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Keyframe for modal animation */
+@keyframes slideIn {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .phone-form-modal {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .phone-form {
+    gap: 10px;
+  }
+}

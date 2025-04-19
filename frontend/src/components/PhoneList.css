@@ -1,0 +1,213 @@
+/* Universal Reset and Font */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f2f4f8;
+  color: #333;
+}
+
+/* Phone List Container */
+.phone-list-container {
+  padding: 40px 20px;
+}
+
+/* Phone List Grid */
+.phone-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  list-style: none;
+}
+
+/* Individual Phone Card */
+.phone-item {
+  width: 260px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.phone-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Image */
+.phone-thumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  transition: transform 0.3s ease;
+}
+
+.phone-thumbnail:hover {
+  transform: scale(1.03);
+}
+
+/* Phone Info */
+.phone-item-info {
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.phone-item-info-link {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.phone-item-info-link:hover {
+  color: #2980b9;
+}
+
+/* Action Buttons */
+.phone-item-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Buttons Styling */
+.edit-button,
+.delete-button,
+.view-details-link,
+.buy-button {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover,
+.view-details-link:hover,
+.buy-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Individual Button Colors */
+.edit-button {
+  background-color: #3498db;
+}
+
+.edit-button:hover {
+  background-color: #2980b9;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+.view-details-link {
+  background-color: #2ecc71;
+}
+
+.view-details-link:hover {
+  background-color: #27ae60;
+}
+
+.buy-button {
+  background-color: #9b59b6;
+}
+
+.buy-button:hover {
+  background-color: #8e44ad;
+}
+
+/* Add New Phone Box */
+.add-phone-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.add-phone-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  width: 160px;
+  background-color: #ffffff;
+  border: 2px dashed #aaa;
+  border-radius: 20px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  margin-left: 30px;
+  margin-right: 30px;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-phone-item:hover {
+  background-color: #f9f9f9;
+  transform: scale(1.05);
+  border-color: #666;
+}
+
+/* Add Phone Text */
+.add-phone-content {
+  text-align: center;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.plus-icon {
+  font-size: 42px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+/* Finder Button */
+.finder-button {
+  background-color: #1abc9c;
+  color: white;
+  padding: 10px 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.finder-button:hover {
+  background-color: #16a085;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.finder-button:active {
+  transform: scale(0.98);
+}
+

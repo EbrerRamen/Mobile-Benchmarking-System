@@ -1,0 +1,85 @@
+/* Container for Trending Section */
+.trending-container {
+    background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    max-width: 500px;
+    width: 100%;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  /* Trending Title */
+  .trending-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    position: relative;
+  }
+  
+  .trending-header::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background-color: #3b82f6;
+    display: block;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+  }
+  
+  /* List Reset */
+  .trending-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Each Trending Item Link */
+  .trending-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 500;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, background-color 0.25s ease;
+  }
+  
+  .trending-link:hover {
+    background-color: #f0f9ff;
+    transform: translateY(-2px);
+  }
+  
+  /* Phone Name */
+  .phone-name {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  /* Star Rating */
+  .rating {
+    font-size: 1rem;
+    color: #fbbf24;
+  }
+  
+  /* Responsive Margin Fix */
+  @media (max-width: 600px) {
+    .trending-link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+  
