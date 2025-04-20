@@ -152,3 +152,30 @@ exports.getTrendingPhones = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+// Show similar phones
+exports.getRelatedPhones = async (req, res) => {
+  try {
+    const phoneId = req.params.id;
+    const currentPhone = await Phone.findById(phoneId);
+
+    if (!currentPhone) {
+      return res.status(404).json({ error: "Phone not found" });
+    }
+
+    const relatedPhones = await Phone.find({
+      _id: { $ne: phoneId },
+      brand: currentPhone.brand,
+      price: {
+        $gte: currentPhone.price - 2000, 
+        $lte: currentPhone.price + 2000,
+      },
+    }).limit(5);
+
+    res.status(200).json(relatedPhones);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};
+

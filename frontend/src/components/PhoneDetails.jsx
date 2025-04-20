@@ -19,6 +19,7 @@ const PhoneDetails = () => {
   });
   const [hasRated, setHasRated] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [relatedPhones, setRelatedPhones] = useState([]);
 
   const handleInputChange = (field, value) => {
     setRatingInput({ ...ratingInput, [field]: value });
@@ -118,6 +119,20 @@ const PhoneDetails = () => {
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
   }, [phone, currentImageIndex]);
+
+  useEffect(() => {
+    fetch(`http://localhost:1080/api/phones/${phoneId}/related`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Related phones data:", data);
+        setRelatedPhones(data || []); // Adjusted based on the data structure
+      })
+      .catch((err) => {
+        console.error("Failed to fetch related phones:", err);
+        setRelatedPhones([]); // Fallback to empty array
+      });
+  }, [phoneId]);
+  
 
   if (loading) return <p>Loading phone details...</p>;
   if (!phone) return <p>Phone not found.</p>;
@@ -231,7 +246,31 @@ const PhoneDetails = () => {
           <p>Thank you for your feedback. You have already rated this product.</p>
         </div>
       )}
+
+      <h3>
+        
+        You might also like:</h3>
+      <div className="related-phones">
+        {Array.isArray(relatedPhones) && relatedPhones.length > 0 ? (
+          relatedPhones.map((phone) => (
+            <a href={`/phone/${phone._id}`} key={phone._id} className="related-phone-link">
+              <div className="related-phone-card">
+                <img
+                  src={phone.imageUrls && phone.imageUrls.length > 0 ? phone.imageUrls[0] : "https://via.placeholder.com/200"}
+                  alt={phone.name}
+                />
+                <h4>{phone.name}</h4>
+                <p>৳{phone.price}</p>
+              </div>
+            </a>
+          ))
+        ) : (
+          <p>No related phones found.</p>
+        )}
+      </div>
     </div>
+
+    
   );
 };
 
