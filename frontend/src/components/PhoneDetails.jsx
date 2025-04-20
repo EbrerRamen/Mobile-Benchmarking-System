@@ -247,9 +247,7 @@ const PhoneDetails = () => {
         </div>
       )}
 
-      <h3>
-        
-        You might also like:</h3>
+      <h3>You might also like:</h3>
       <div className="related-phones">
         {Array.isArray(relatedPhones) && relatedPhones.length > 0 ? (
           relatedPhones.map((phone) => (
