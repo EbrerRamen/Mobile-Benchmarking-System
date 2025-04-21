@@ -17,6 +17,8 @@ import AddNewsForm from './components/AddNewsForm';
 import TrendingPhones from './components/TrendingPhones';
 import PhoneFinderForm from './components/PhoneFinderForm';
 import ValueForMoney from './components/ValueForMoney';
+import Wishlist from './components/Wishlist'
+import Notifications from './components/Notifications'
 import './App.css';
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -92,6 +94,8 @@ function AppLayout() {
             <Route path="/home" element={<PhoneList openAddPhoneForm={openAddPhoneForm} filters={filters}/>} />
             <Route path="/phone/:phoneId" element={<PhoneDetails />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Routes>
         </div>
       </div>

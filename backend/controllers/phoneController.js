@@ -1,5 +1,7 @@
 const Phone = require('../models/Phone');
 const Rating = require('../models/Rating');
+const Wishlist = require('../models/wishlist')
+const Notification = require('../models/Notification')
 // Admin: Add Phone
 exports.addPhone = async (req, res) => {
   try {
@@ -10,22 +12,52 @@ exports.addPhone = async (req, res) => {
   }
 };
 
-// Admin: Update Phone
+
+// // Admin: Update Phone (Abrar)
+// exports.updatePhone = async (req, res) => {
+//   try {
+//     const updatedPhone = await Phone.findByIdAndUpdate(
+//       req.params.id,
+//       req.body, 
+//       { new: true, runValidators: true }
+//     );
+//     if (!updatedPhone) {
+//       return res.status(404).json({ error: 'Phone not found' });
+//     }
+//     res.json(updatedPhone);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
+
+// Admin: Update Phone (Torsha)
 exports.updatePhone = async (req, res) => {
-  try {
-    const updatedPhone = await Phone.findByIdAndUpdate(
-      req.params.id,
-      req.body, 
-      { new: true, runValidators: true }
-    );
-    if (!updatedPhone) {
-      return res.status(404).json({ error: 'Phone not found' });
-    }
-    res.json(updatedPhone);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  const { id } = req.params
+  const updates = req.body
+
+  // fetch current phone first
+  const oldPhone = await Phone.findById(id)
+  if (!oldPhone) return res.status(404).json({ message: 'Phone not found' })
+
+  const oldPrice = oldPhone.price
+  const newPrice = updates.price
+
+  // apply your updates
+  const updated = await Phone.findByIdAndUpdate(id, updates, { new: true })
+
+  // if price actually changed, notify everyone who wished it
+  if (newPrice != null && newPrice !== oldPrice) {
+    const wishers = await Wishlist.find({ phone: id })
+    const notes = wishers.map(w => ({
+      user: w.user,
+      message: `${oldPhone.name} price changed: $${oldPrice} → $${newPrice}`
+    }))
+    await Notification.insertMany(notes)
   }
-};
+
+  res.json(updated)
+}
 
 // Admin: Delete Phone
 exports.deletePhone = async (req, res) => {

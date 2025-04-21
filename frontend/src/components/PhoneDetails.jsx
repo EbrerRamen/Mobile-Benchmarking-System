@@ -7,6 +7,7 @@ import './PhoneDetails.css';
 const PhoneDetails = () => {
   const { phoneId } = useParams();
   const [phone, setPhone] = useState(null);
+  const [oldPrice, setOldPrice] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [averageRatings, setAverageRatings] = useState(null);
@@ -132,6 +133,42 @@ const PhoneDetails = () => {
         setRelatedPhones([]); // Fallback to empty array
       });
   }, [phoneId]);
+
+  const handleAddToWishlist = async () => {
+    const user = getAuth().currentUser
+    if (!user) return alert('Log in to add to wishlist')
+    try {
+      await axios.post('http://localhost:1080/api/wishlist/add', {
+        user: user.uid,
+        phone: phoneId
+      })
+      alert('Added to wishlist')
+    } catch {
+      alert('Failed to add')
+    }
+  }
+  useEffect(() => {
+    if (phone) setOldPrice(phone.price)
+  }, [phone])
+
+  useEffect(() => {
+    if (!phoneId) return
+    const intervalId = setInterval(async () => {
+      try {
+        const res = await axios.get(`http://localhost:1080/api/phones/${phoneId}`)
+        const latestPrice = res.data.price
+        if (oldPrice !== null && latestPrice !== oldPrice) {
+          alert(`Price changed: $${oldPrice} → $${latestPrice}`)
+          setPhone(p => ({ ...p, price: latestPrice }))
+          setOldPrice(latestPrice)
+        }
+      } catch (err) {
+        console.error('Price check failed', err)
+      }
+    }, 60000)  // every 60s
+
+    return () => clearInterval(intervalId)
+  }, [phoneId, oldPrice])
   
 
   if (loading) return <p>Loading phone details...</p>;
@@ -185,6 +222,9 @@ const PhoneDetails = () => {
           disabled={!phone.purchaseLink}
         >
           Buy Now
+        </button>
+        <button onClick={handleAddToWishlist} className="wishlist-button">
+          Add to Wishlist
         </button>
       </div>
 
