@@ -6,13 +6,15 @@ const {
   deletePhone,
   getPhoneDetails,
   getTrendingPhones,
-  getRelatedPhones
+  getRelatedPhones,
+  getTopValuePhones
 } = require('../controllers/phoneController');
 
 const router = express.Router();
 
 router.post('/add', addPhone);          // Admin: Add phone
 router.get('/trending', getTrendingPhones); // Get Trending Phones
+router.get('/top-value', getTopValuePhones); // Get top value for money phones
 router.get('/', getPhones);             // User: View all phones
 router.put('/:id', updatePhone);        // Admin: Edit phone
 router.delete('/:id', deletePhone);     // Admin: Delete phone

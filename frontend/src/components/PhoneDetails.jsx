@@ -190,13 +190,138 @@ const PhoneDetails = () => {
 
       <div className="phone-features">
         <h3>Features</h3>
-        <ul>
-          <li><strong>Camera:</strong> {phone.features?.camera || 'N/A'}</li>
-          <li><strong>Battery:</strong> {phone.features?.battery || 'N/A'}</li>
-          <li><strong>Display:</strong> {phone.features?.display || 'N/A'}</li>
-          <li><strong>Processor:</strong> {phone.features?.processor || 'N/A'}</li>
-        </ul>
+        <div className="feature-grid">
+          {/* Camera */}
+          <div className="feature-category">
+            <div className="category-title">Camera</div>
+            <div className="feature-row">
+              <div className="feature-item">Main</div>
+              <div className="feature-description">{phone.features?.camera?.main || 'N/A'} MP</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">UltraWide</div>
+              <div className="feature-description">{phone.features?.camera?.ultraWide || 'N/A'} MP</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Front</div>
+              <div className="feature-description">{phone.features?.camera?.front || 'N/A'} MP</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Video Recording</div>
+              <div className="feature-description">{phone.features?.camera?.videoRecording || 'N/A'}</div>
+            </div>
+          </div>
+
+          {/* Battery */}
+          <div className="feature-category">
+            <div className="category-title">Battery</div>
+            <div className="feature-row">
+              <div className="feature-item">Capacity</div>
+              <div className="feature-description">{phone.features?.battery?.capacity || 'N/A'} mAh</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Charging Speed</div>
+              <div className="feature-description">{phone.features?.battery?.chargingSpeed || 'N/A'} W</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Type</div>
+              <div className="feature-description">{phone.features?.battery?.type || 'N/A'}</div>
+            </div>
+          </div>
+
+          {/* Display */}
+          <div className="feature-category">
+            <div className="category-title">Display</div>
+            <div className="feature-row">
+              <div className="feature-item">Size</div>
+              <div className="feature-description">{phone.features?.display?.size || 'N/A'} inches</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Type</div>
+              <div className="feature-description">{phone.features?.display?.type || 'N/A'}</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Resolution</div>
+              <div className="feature-description">{phone.features?.display?.resolution || 'N/A'}</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Refresh Rate</div>
+              <div className="feature-description">{phone.features?.display?.refreshRate || 'N/A'} Hz</div>
+            </div>
+          </div>
+
+          {/* Processor */}
+          <div className="feature-category">
+            <div className="category-title">Processor</div>
+            <div className="feature-row">
+              <div className="feature-item">Name</div>
+              <div className="feature-description">{phone.features?.processor?.name || 'N/A'}</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Benchmark Score</div>
+              <div className="feature-description">{phone.features?.processor?.benchmarkScore || 'N/A'}</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Cores</div>
+              <div className="feature-description">{phone.features?.processor?.cores || 'N/A'}</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Clock Speed</div>
+              <div className="feature-description">{phone.features?.processor?.clockSpeed || 'N/A'} GHz</div>
+            </div>
+          </div>
+
+          {/* Memory */}
+          <div className="feature-category">
+            <div className="category-title">Memory</div>
+            <div className="feature-row">
+              <div className="feature-item">RAM</div>
+              <div className="feature-description">{phone.features?.memory?.ram || 'N/A'} GB</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Storage</div>
+              <div className="feature-description">{phone.features?.memory?.storage || 'N/A'} GB</div>
+            </div>
+            <div className="feature-row">
+              <div className="feature-item">Expandable</div>
+              <div className="feature-description">{phone.features?.memory?.expandable ? 'Yes' : 'No'}</div>
+            </div>
+          </div>
+
+          {/* OS */}
+          <div className="feature-category">
+            <div className="category-title">OS</div>
+            <div className="feature-description">{phone.features?.os || 'N/A'}</div>
+          </div>
+
+          {/* Network */}
+          <div className="feature-category">
+            <div className="category-title">Network</div>
+            <div className="feature-description">{Array.isArray(phone.features?.network) ? phone.features?.network.join(", ") : 'N/A'}</div>
+          </div>
+
+          {/* SIM */}
+          <div className="feature-category">
+            <div className="category-title">SIM</div>
+            <div className="feature-description">{phone.features?.sim || 'N/A'}</div>
+          </div>
+
+          {/* Dimensions */}
+          <div className="feature-category">
+            <div className="category-title">Dimensions</div>
+            <div className="feature-description">{phone.features?.dimensions || 'N/A'}</div>
+          </div>
+
+          {/* Weight */}
+          <div className="feature-category">
+            <div className="category-title">Weight</div>
+            <div className="feature-description">{phone.features?.weight || 'N/A'} grams</div>
+          </div>
+        </div>
       </div>
+
+
+
 
       <div className="rating-section">
         <h3>Average User Ratings</h3>

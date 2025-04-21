@@ -65,7 +65,7 @@ exports.getPhones = async (req, res) => {
       phonesQuery = phonesQuery.sort({ price: -1 });
     }
 
-    const phones = await phonesQuery;
+    const phones = await phonesQuery.lean({ virtuals: true });
     res.status(200).json(phones);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -78,7 +78,7 @@ exports.getPhoneDetails = async (req, res) => {
   const { phoneId } = req.params;
 
   try {
-    const phone = await Phone.findById(phoneId);
+    const phone = await Phone.findById(phoneId).lean({ virtuals: true });
     if (!phone) {
       return res.status(404).json({ error: 'Phone not found' });
     }
@@ -176,6 +176,21 @@ exports.getRelatedPhones = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getTopValuePhones = async (req, res) => {
+  try {
+    const phones = await Phone.find().lean({ virtuals: true });
+
+    const topPhones = phones
+      .filter(phone => phone.valueScore > 0)
+      .sort((a, b) => b.valueScore - a.valueScore)
+      .slice(0, 10);
+
+    res.status(200).json(topPhones);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 

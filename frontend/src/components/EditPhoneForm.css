@@ -1,118 +1,152 @@
-/* EditPhoneForm.css */
-
 /* Overlay to darken the background when the modal is open */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  /* Modal container */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal container */
+.phone-form-modal {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 600px;
+  max-width: 95%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+/* Header */
+.phone-form-header {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* General form layout */
+.phone-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form group styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Inputs */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Image URL input block */
+.image-url-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.image-url-input input {
+  flex: 1;
+}
+
+/* Remove image button */
+.remove-image-button {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-image-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Add image button */
+.form-group button[type="button"] {
+  align-self: flex-start;
+  background-color: #2196F3;
+  color: white;
+}
+
+.form-group button[type="button"]:hover {
+  background-color: #1976d2;
+}
+
+/* Checkbox label */
+.form-group label input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+/* Buttons at the bottom */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.form-buttons button {
+  flex: 1;
+}
+
+/* Submit button */
+.form-buttons button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.form-buttons button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Cancel button */
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #e53935;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
   .phone-form-modal {
-    background-color: white;
+    width: 90%;
     padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-height: 90vh;
   }
-  
-  /* Header for the modal */
-  .phone-form-header {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* General styling for form */
-  .phone-form {
-    display: flex;
+
+  .form-buttons {
     flex-direction: column;
   }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  /* Labels */
-  .form-group label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    display: block;
-    color: #333;
-  }
-  
-  /* Inputs */
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  /* Styling for image URL input */
-  .form-group input[type="text"] {
-    padding: 8px;
-  }
-  
-  /* Feature input fields */
-  .form-group input[type="text"] {
-    margin-bottom: 10px;
-  }
-  
-  /* Button styling */
-  button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    margin-bottom: 10px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Cancel button */
-  .cancel-button {
-    background-color: #f44336;
-  }
-  
-  .cancel-button:hover {
-    background-color: #e53935;
-  }
-  
-  /* Styling for the 'Features' section */
-  .form-group > div {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group input {
-    margin-bottom: 10px;
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 768px) {
-    .phone-form-modal {
-      width: 90%;
-    }
-  
-    .phone-form {
-      padding: 15px;
-    }
-  }
-  
+}
