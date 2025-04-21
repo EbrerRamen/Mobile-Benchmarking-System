@@ -16,6 +16,7 @@ import Login from './components/Login';
 import AddNewsForm from './components/AddNewsForm';
 import TrendingPhones from './components/TrendingPhones';
 import PhoneFinderForm from './components/PhoneFinderForm';
+import ValueForMoney from './components/ValueForMoney';
 import './App.css';
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -81,6 +82,9 @@ function AppLayout() {
       <div style={{ display: 'flex' }}>
         <div style={{ width: '300px', padding: '1rem', borderRight: '1px solid #ccc' }}>
           <TrendingPhones />
+          <div style={{ marginTop: '1rem' }}> 
+          <ValueForMoney /> {/* Add the ValueForMoney component here */}
+          </div>
         </div>
 
         <div style={{ flex: 1, padding: '1rem' }}>
@@ -105,6 +109,8 @@ function App() {
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/trending" element={<TrendingPhones />} />
+        <Route path="/valueformoney" element={<ValueForMoney />} />
+
 
         {/* Protected + layout routes */}
         <Route path="/*" element={<AppLayout />} />

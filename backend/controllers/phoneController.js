@@ -181,15 +181,31 @@ exports.getRelatedPhones = async (req, res) => {
 
 exports.getTopValuePhones = async (req, res) => {
   try {
-    const phones = await Phone.find().lean({ virtuals: true });
+    const phones = await Phone.find();
+
+    // 🔍 Debug: total phones fetched
+    console.log("Total phones fetched:", phones.length);
+
+    // 🔍 Debug: log first 5 phones' price and valueScore
+    phones.slice(0, 5).forEach((phone, index) => {
+      console.log(`📱 Phone ${index + 1}:`, {
+        model: phone.model || "N/A",
+        price: phone.price,
+        valueScore: phone.valueScore
+      });
+    });
 
     const topPhones = phones
-      .filter(phone => phone.valueScore > 0)
+      .filter(phone => phone.valueScore > 0 && phone.price)
       .sort((a, b) => b.valueScore - a.valueScore)
       .slice(0, 10);
 
+    // 🔍 Debug: top phones after filtering
+    console.log("Top value phones:", topPhones);
+
     res.status(200).json(topPhones);
   } catch (error) {
+    console.error("Error in getTopValuePhones:", error.message);
     res.status(500).json({ error: error.message });
   }
 };
