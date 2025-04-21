@@ -204,7 +204,7 @@ const EditPhoneForm = ({ phone, onUpdate, onCancel, isOpen, closeModal }) => {
                 )}
               </div>
             ))}
-            <button type="button" onClick={handleAddImage}>Add another image</button>
+            <button type="button" className="add-image-button" onClick={handleAddImage}>Add another image</button>
           </div>
   
           {/* Features */}

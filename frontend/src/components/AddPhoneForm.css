@@ -36,6 +36,31 @@
     border-radius: 6px;
     font-size: 1em;
   }
+
+  .add-image-button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .add-image-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  .add-image-button:active {
+    transform: scale(0.97);
+  }
+  
   
   .form-actions {
     display: flex;

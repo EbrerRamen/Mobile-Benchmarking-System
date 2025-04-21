@@ -176,7 +176,7 @@ const AddPhoneForm = ({ isOpen, closeModal }) => {
                 placeholder={`Image URL ${index + 1}`}
               />
             ))}
-            <button type="button" onClick={addImageUrlField}>Add More Images</button>
+            <button type="button" className="add-image-button" onClick={addImageUrlField}>Add More Images</button>
           </div>
 
           {/* Features */}

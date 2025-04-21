@@ -187,6 +187,14 @@ body {
   margin-bottom: 6px;
 }
 
+.finder-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+  margin-bottom: 20px;
+}
+
+
 /* Finder Button */
 .finder-button {
   background-color: #1abc9c;
@@ -199,7 +207,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-top: -25px;
+  /* margin-top: -50px; */
 }
 
 .finder-button:hover {

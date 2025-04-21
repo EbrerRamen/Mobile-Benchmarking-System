@@ -1,10 +1,9 @@
-General Layout
+/* General Layout */
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 /* Heading Style */
@@ -15,22 +14,47 @@ h1 {
   margin-top: 20px;
 }
 
-/* Button to trigger modal */
-button {
-  display: block;
-  margin: 20px auto;
-  padding: 12px 24px;
+/* Phone Basic Info Section */
+.phone-basic-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.phone-basic-info p {
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.phone-basic-info .purchase-button,
+.phone-basic-info .wishlist-button {
+  padding: 10px 20px;
   font-size: 1.1em;
-  background-color: #007bff;
-  color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.phone-basic-info .purchase-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.phone-basic-info .purchase-button:hover {
   background-color: #0056b3;
+}
+
+.phone-basic-info .wishlist-button {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.phone-basic-info .wishlist-button:hover {
+  background-color: #e0a800;
 }
 
 /* Modal Overlay */
@@ -78,18 +102,18 @@ button:hover {
 }
 
 /* Form Group */
-.form-group {
+.phone-form .form-group {
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
+.phone-form .form-group label {
   margin-bottom: 5px;
   font-weight: bold;
   color: #333;
 }
 
-.form-group input {
+.phone-form .form-group input {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -99,14 +123,14 @@ button:hover {
   transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.phone-form .form-group input:focus {
   outline: none;
   border-color: #007bff;
   background-color: #fff;
 }
 
-/* Button Styles */
-button[type="submit"] {
+/* Form Buttons inside Modal */
+.phone-form-modal button[type="submit"] {
   padding: 12px;
   border-radius: 6px;
   font-size: 1.1em;
@@ -117,18 +141,18 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
+.phone-form-modal button[type="submit"]:hover {
   background-color: #218838;
 }
 
-button.cancel-button {
+.phone-form-modal .cancel-button {
   background-color: #dc3545;
   color: white;
   border: none;
   margin-top: 10px;
 }
 
-button.cancel-button:hover {
+.phone-form-modal .cancel-button:hover {
   background-color: #c82333;
 }
 
