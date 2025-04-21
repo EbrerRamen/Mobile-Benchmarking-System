@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
@@ -14,8 +13,8 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       if (user) {
-        const token = await user.getIdTokenResult(true); // refreshes token
-        setIsAdmin(!!token.claims.admin); // true if admin
+        const token = await user.getIdTokenResult(true); 
+        setIsAdmin(!!token.claims.admin); 
       } else {
         setIsAdmin(false);
       }

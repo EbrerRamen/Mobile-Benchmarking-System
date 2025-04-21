@@ -105,7 +105,7 @@ const AddPhoneForm = ({ isOpen, closeModal }) => {
     try {
       const res = await axios.post('http://localhost:1080/api/phones/add', newPhone);
       if (res.status === 201) {
-        alert('Phone added successfully!');
+        // alert('Phone added successfully!');
         closeModal();
         setNewPhone({
           name: '',

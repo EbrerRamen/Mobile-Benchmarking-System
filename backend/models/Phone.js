@@ -3,43 +3,43 @@ const mongoose = require('mongoose');
 const phoneSchema = new mongoose.Schema({
   name: { type: String, required: true },
   brand: { type: String },
-  price: { type: Number }, // in BDT or USD
+  price: { type: Number }, 
 
   features: {
     camera: {
-      main: { type: Number },      // in MP
-      ultraWide: { type: Number }, // optional, in MP
-      front: { type: Number },     // in MP
-      videoRecording: { type: String }, // e.g., "4K@60fps"
+      main: { type: Number },      
+      ultraWide: { type: Number }, 
+      front: { type: Number },     
+      videoRecording: { type: String }, 
     },
     battery: {
-      capacity: { type: Number },      // in mAh
-      chargingSpeed: { type: Number }, // in Watts
-      type: { type: String },          // e.g., "Li-Po"
+      capacity: { type: Number },      
+      chargingSpeed: { type: Number }, 
+      type: { type: String },         
     },
     display: {
-      size: { type: Number },        // in inches
-      type: { type: String },        // AMOLED, IPS, etc.
-      resolution: { type: String },  // e.g., "1080x2400"
-      refreshRate: { type: Number }, // 60, 90, 120 Hz
+      size: { type: Number },        
+      type: { type: String },        
+      resolution: { type: String },  
+      refreshRate: { type: Number }, 
     },
     processor: {
-      name: { type: String },       // e.g., "Snapdragon 695"
-      benchmarkScore: { type: Number }, // Geekbench or custom scale
-      cores: { type: Number },      // e.g., 8
-      clockSpeed: { type: Number }, // in GHz
+      name: { type: String },       
+      benchmarkScore: { type: Number }, 
+      cores: { type: Number },      
+      clockSpeed: { type: Number }, 
     },
     memory: {
-      ram: { type: Number },        // in GB
-      storage: { type: Number },    // in GB
-      storageType: { type: String },// UFS 3.1, eMMC, etc.
+      ram: { type: Number },        
+      storage: { type: Number },    
+      storageType: { type: String },
       expandable: { type: Boolean },
     },
-    os: { type: String },           // e.g., "Android 13"
-    network: [{ type: String }],    // e.g., ["4G", "5G"]
-    sim: { type: String },          // e.g., "Dual SIM"
+    os: { type: String },          
+    network: [{ type: String }],    
+    sim: { type: String },          
     dimensions: { type: String },
-    weight: { type: Number },       // in grams
+    weight: { type: Number },       
   },
 
   imageUrls: [{ type: String, required: true }],
@@ -70,7 +70,6 @@ phoneSchema.virtual('valueScore').get(function () {
   return Number((specScore / price).toFixed(2));
 });
 
-// Make sure virtuals show up in JSON & Object responses
 phoneSchema.set('toObject', { virtuals: true });
 phoneSchema.set('toJSON', { virtuals: true });
 

@@ -1,6 +1,6 @@
-// components/PhoneFinderForm.js
+
 import React, { useState } from 'react';
-import './PhoneFinderForm.css'; // optional styling
+import './PhoneFinderForm.css'; 
 
 const PhoneFinderForm = ({ isOpen, onClose, onSearch }) => {
   const [search, setSearch] = useState('');
@@ -10,7 +10,7 @@ const PhoneFinderForm = ({ isOpen, onClose, onSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch({ search, brand, sort: sortOrder });
-    onClose(); // close the modal after submitting
+    onClose(); 
   };
 
   if (!isOpen) return null;

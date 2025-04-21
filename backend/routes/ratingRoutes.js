@@ -9,16 +9,10 @@ const {
 
 const router = express.Router();
 
-// Add Rating
-router.post('/add', addRating);
 
-// Get all ratings for a specific phone
-router.get('/:phoneId', getRatingsForPhone);
-
-// Get average ratings for a phone
-router.get('/:phoneId/average', getAverageRatings);
-
-// Check if a specific user has already rated this phone
-router.get('/check/:phoneId/:user', checkIfRated); 
+router.post('/add', addRating); // Add Rating
+router.get('/:phoneId', getRatingsForPhone); // Get all ratings for a specific phone
+router.get('/:phoneId/average', getAverageRatings); // Get average ratings for a phone
+router.get('/check/:phoneId/:user', checkIfRated); // Check if a specific user has already rated this phone
 
 module.exports = router;

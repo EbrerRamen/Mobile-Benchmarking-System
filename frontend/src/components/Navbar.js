@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Navbar.css'; // optional, if you want to style separately
+import './Navbar.css'; 
 import { getAuth, signOut } from 'firebase/auth';
 
 const Navbar = ({ onOpenPhoneFinder }) => {

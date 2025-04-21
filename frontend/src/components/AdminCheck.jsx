@@ -8,11 +8,10 @@ const AdminCheck = () => {
   useEffect(() => {
     const auth = getAuth();
 
-    // Listen to auth state changes
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          // Ensure the token is refreshed
+    
           const tokenResult = await user.getIdTokenResult();
           console.log("Custom Claims:", tokenResult.claims);
 
@@ -27,15 +26,15 @@ const AdminCheck = () => {
           console.error("Error getting token:", error);
         }
       }
-      setIsLoading(false); // Stop loading after auth state changes
+      setIsLoading(false); 
     });
 
-    // Cleanup function to unsubscribe from auth state changes
+ 
     return () => unsubscribe();
   }, []);
 
   if (isLoading) {
-    return <p>Loading...</p>; // Provide feedback during loading
+    return <p>Loading...</p>; 
   }
 
   return (

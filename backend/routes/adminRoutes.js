@@ -1,13 +1,11 @@
-// adminRoutes.js or userRoutes.js
 
 const express = require('express');
 const admin = require('firebase-admin');
 
 const router = express.Router();
 
-// Initialize Firebase Admin SDK (usually done once in your backend)
 admin.initializeApp({
-  credential: admin.credential.cert(require('./serviceAccountKey.json')), // Path to your service account key
+  credential: admin.credential.cert(require('./serviceAccountKey.json')), 
 });
 
 // Set admin claim for a user

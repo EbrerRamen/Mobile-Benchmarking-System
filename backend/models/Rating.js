@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ratingSchema = new mongoose.Schema({
   phone: { type: mongoose.Schema.Types.ObjectId, ref: 'Phone', required: true },
-  user: { type: String, required: true }, // or ObjectId if you have user model
+  user: { type: String, required: true },
   ratings: {
     camera: Number,
     battery: Number,
