@@ -23,6 +23,7 @@ const Navbar = ({ onOpenPhoneFinder }) => {
         <Link to="/news">News</Link>
         <Link to="/wishlist">Wishlist</Link>
         <Link to="/notifications">Notifications {count > 0 && <span className="badge">{count}</span>}</Link>
+        <Link to="/benchmark">Benchmark</Link>
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </div>
     </nav>

@@ -19,6 +19,8 @@ import PhoneFinderForm from './components/PhoneFinderForm';
 import ValueForMoney from './components/ValueForMoney';
 import Wishlist from './components/Wishlist'
 import Notifications from './components/Notifications'
+import Benchmark from './components/Benchmark';
+
 import './App.css';
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -96,6 +98,7 @@ function AppLayout() {
             <Route path="/news" element={<NewsPage />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/benchmark" element={<Benchmark />} />
           </Routes>
         </div>
       </div>

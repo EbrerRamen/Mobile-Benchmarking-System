@@ -292,3 +292,123 @@ exports.getTopValuePhones = async (req, res) => {
   }
 };
 
+// Benchmark two phones
+
+exports.benchmarkPhones = async (req, res) => {
+  try {
+    const { phoneAId, phoneBId } = req.query;
+
+    const [phoneA, phoneB] = await Promise.all([
+      Phone.findById(phoneAId).lean({ virtuals: true }),
+      Phone.findById(phoneBId).lean({ virtuals: true })
+    ]);
+
+    if (!phoneA || !phoneB) {
+      return res.status(404).json({ message: 'One or both phones not found' });
+    }
+
+    const weights = {
+      performance: 0.25,
+      ram: 0.1,
+      storage: 0.05,
+      battery: 0.1,
+      display: 0.1,
+      camera: 0.15,
+      value: 0.1,
+      chargingSpeed: 0.05,
+      cores: 0.05,
+      clockSpeed: 0.05
+    };
+
+    const normalize = (a, b) => {
+      const max = Math.max(a, b);
+      return max === 0 ? [0, 0] : [a / max, b / max];
+    };
+
+    const raw = {
+      performance: [phoneA.features?.processor?.benchmarkScore || 0, phoneB.features?.processor?.benchmarkScore || 0],
+      ram: [phoneA.features?.memory?.ram || 0, phoneB.features?.memory?.ram || 0],
+      storage: [phoneA.features?.memory?.storage || 0, phoneB.features?.memory?.storage || 0],
+      battery: [phoneA.features?.battery?.capacity || 0, phoneB.features?.battery?.capacity || 0],
+      display: [phoneA.features?.display?.refreshRate || 0, phoneB.features?.display?.refreshRate || 0],
+      camera: [phoneA.features?.camera?.main || 0, phoneB.features?.camera?.main || 0],
+      chargingSpeed: [phoneA.features?.battery?.chargingSpeed || 0, phoneB.features?.battery?.chargingSpeed || 0],
+      cores: [phoneA.features?.processor?.cores || 0, phoneB.features?.processor?.cores || 0],
+      clockSpeed: [phoneA.features?.processor?.clockSpeed || 0, phoneB.features?.processor?.clockSpeed || 0],
+      value: [phoneA.valueScore || 0, phoneB.valueScore || 0]
+    };
+
+    const normalized = {};
+    for (const key in raw) {
+      normalized[key] = normalize(raw[key][0], raw[key][1]);
+    }
+
+    const calcScore = (norm) => Object.entries(weights)
+      .reduce((sum, [key, weight]) => sum + norm[key][0] * weight, 0);
+
+    const scoreA = calcScore(normalized);
+    const scoreB = Object.entries(weights)
+      .reduce((sum, [key, weight]) => sum + normalized[key][1] * weight, 0);
+
+    const breakdown = {};
+    for (const key in weights) {
+      breakdown[key] = {
+        phoneA: normalized[key][0].toFixed(2),
+        phoneB: normalized[key][1].toFixed(2)
+      };
+    }
+
+    const winner = scoreA > scoreB ? phoneA : scoreB > scoreA ? phoneB : null;
+    const analysis = [];
+
+    for (const key in weights) {
+      const valA = normalized[key][0];
+      const valB = normalized[key][1];
+      if (valA !== valB) {
+        const better = valA > valB ? phoneA.name : phoneB.name;
+        const reason = key.charAt(0).toUpperCase() + key.slice(1);
+        analysis.push(`${better} has better ${reason}.`);
+      }
+    }
+
+    res.status(200).json({
+      phoneA: {
+        name: phoneA.name,
+        score: scoreA.toFixed(2),
+        imageUrls: phoneA.imageUrls && phoneA.imageUrls.length > 0 ? phoneA.imageUrls : ['https://via.placeholder.com/200'],
+        processor: phoneA.features?.processor?.name || 'N/A',
+        ram: phoneA.features?.memory?.ram || 'N/A',
+        storage: phoneA.features?.memory?.storage || 'N/A',
+        battery: phoneA.features?.battery?.capacity || 'N/A',
+        display: phoneA.features?.display?.type || 'N/A',
+        camera: `Main: ${phoneA.features?.camera?.main} MP, UltraWide: ${phoneA.features?.camera?.ultraWide || 'N/A'} MP, Front: ${phoneA.features?.camera?.front || 'N/A'} MP`,
+        chargingSpeed: phoneA.features?.battery?.chargingSpeed || 'N/A',
+        cores: phoneA.features?.processor?.cores || 'N/A',
+        clockSpeed: phoneA.features?.processor?.clockSpeed || 'N/A'
+      },
+      phoneB: {
+        name: phoneB.name,
+        score: scoreB.toFixed(2),
+        imageUrls: phoneB.imageUrls && phoneB.imageUrls.length > 0 ? phoneB.imageUrls : ['https://via.placeholder.com/200'],
+        processor: phoneB.features?.processor?.name || 'N/A',
+        ram: phoneB.features?.memory?.ram || 'N/A',
+        storage: phoneB.features?.memory?.storage || 'N/A',
+        battery: phoneB.features?.battery?.capacity || 'N/A',
+        display: phoneB.features?.display?.type || 'N/A',
+        camera: `Main: ${phoneB.features?.camera?.main} MP, UltraWide: ${phoneB.features?.camera?.ultraWide || 'N/A'} MP, Front: ${phoneB.features?.camera?.front || 'N/A'} MP`,
+        chargingSpeed: phoneB.features?.battery?.chargingSpeed || 'N/A',
+        cores: phoneB.features?.processor?.cores || 'N/A',
+        clockSpeed: phoneB.features?.processor?.clockSpeed || 'N/A'
+      },
+      verdict: winner ? `${winner.name} wins` : 'It’s a tie!',
+      winner: winner ? { _id: winner._id, name: winner.name } : null,
+      analysis
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+

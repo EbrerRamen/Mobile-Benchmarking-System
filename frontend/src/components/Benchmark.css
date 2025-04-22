@@ -1,0 +1,232 @@
+.benchmark-page {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
+}
+
+.benchmark-page h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+}
+
+.benchmark-selectors {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.benchmark-selectors select,
+.benchmark-selectors button {
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.benchmark-selectors select:hover,
+.benchmark-selectors button:hover {
+  border-color: #007bff;
+}
+
+.benchmark-selectors button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.benchmark-selectors button:hover {
+  background-color: #0056b3;
+}
+
+.benchmark-selectors button:active {
+  transform: scale(0.97);
+}
+
+.benchmark-result h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.score-bars {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.score-item {
+  flex: 1;
+  max-width: 400px;
+}
+
+.score-item p {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  background: #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 25px;
+}
+
+.progress-bar > div {
+  background: linear-gradient(90deg, #28a745, #218838);
+  height: 100%;
+  color: white;
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.image-comparison {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.image-comparison img {
+  max-width: 220px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.image-comparison img:hover {
+  transform: scale(1.05);
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.specs-table th,
+.specs-table td {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.specs-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.specs-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.verdict-box {
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 10px;
+  width: fit-content;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.verdict-box.phone-a {
+  border-left: 6px solid #007bff;
+}
+
+.verdict-box.phone-b {
+  border-left: 6px solid #28a745;
+}
+
+.tie {
+    border-left: 6px solid #FFC107;
+  }
+
+  .benchmark-analysis {
+    margin-top: 2rem;
+    background: linear-gradient(145deg, #f0f4f8, #e1e9f0);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .benchmark-analysis:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .benchmark-analysis h4 {
+    margin-bottom: 1.5rem;
+    color: #007bff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .benchmark-analysis ul {
+    padding-left: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    border-left: 4px solid #007bff;
+  }
+  
+  .benchmark-analysis li {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+  
+  .benchmark-analysis li:before {
+    content: "✔️";
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    font-size: 1.5rem;
+    color: #28a745;
+  }
+  
+  .benchmark-analysis li:nth-child(odd) {
+    background-color: rgba(0, 123, 255, 0.05);
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  
+  .benchmark-analysis li:nth-child(even) {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  
+  .benchmark-analysis li:hover {
+    background-color: rgba(0, 123, 255, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
