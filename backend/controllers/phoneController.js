@@ -223,7 +223,7 @@ exports.getTrendingPhones = async (req, res) => {
         }
       },
       { $sort: { averageRating: -1, count: -1 } },
-      { $limit: 10 },
+      { $limit: 6 },
       {
         $lookup: {
           from: 'phones',
@@ -262,10 +262,10 @@ exports.getRelatedPhones = async (req, res) => {
 
     const relatedPhones = await Phone.find({
       _id: { $ne: phoneId },
-      brand: currentPhone.brand,
+      // brand: currentPhone.brand,
       price: {
-        $gte: currentPhone.price - 2000, 
-        $lte: currentPhone.price + 2000,
+        $gte: currentPhone.price - 100, 
+        $lte: currentPhone.price + 100,
       },
     }).limit(5);
 
@@ -284,7 +284,7 @@ exports.getTopValuePhones = async (req, res) => {
     const topPhones = phones
       .filter(phone => phone.valueScore > 0 && phone.price)
       .sort((a, b) => b.valueScore - a.valueScore)
-      .slice(0, 10);
+      .slice(0, 5);
 
     res.status(200).json(topPhones);
   } catch (error) {

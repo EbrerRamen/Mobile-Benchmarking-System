@@ -65,41 +65,42 @@ const PhoneList = ({ openAddPhoneForm }) => {
           isOpen={isModalOpen}
           closeModal={handleCloseModal}
         />
-        
       )}
+  
       <div className="finder-button-container">
-  <button onClick={() => setIsFinderOpen(true)} className="finder-button">
-    🔍 Open Phone Finder
-  </button>
-</div>
-{isFinderOpen && (
-  <PhoneFinderForm
-    isOpen={isFinderOpen}
-    onClose={() => setIsFinderOpen(false)}
-    onSearch={(filters) => {
-      fetchPhones(filters);
-      setIsFinderOpen(false);
-    }}
-  />
-)}
-
-      {phones.length === 0 ? (
-        <p>No phones available.</p>
-      ) : (
-        
-        <ul className="phone-list">
-          {/* ✅ Admin Add Button as part of the grid */}
-          {!isLoading && isAdmin && (
-            <li className="phone-item">
-              <div className="add-phone-item" onClick={openAddPhoneForm}>
-                <div className="add-phone-content">
-                  <div className="plus-icon">+</div>
-                </div>
+        <button onClick={() => setIsFinderOpen(true)} className="finder-button">
+          🔍 Open Phone Finder
+        </button>
+      </div>
+  
+      {isFinderOpen && (
+        <PhoneFinderForm
+          isOpen={isFinderOpen}
+          onClose={() => setIsFinderOpen(false)}
+          onSearch={(filters) => {
+            fetchPhones(filters);
+            setIsFinderOpen(false);
+          }}
+        />
+      )}
+  
+      <ul className="phone-list">
+        {!isLoading && isAdmin && (
+          <li className="phone-item">
+            <div className="add-phone-item" onClick={openAddPhoneForm}>
+              <div className="add-phone-content">
+                <div className="plus-icon">+</div>
               </div>
-            </li>
-          )}
-
-          {phones.map((phone) => (
+            </div>
+          </li>
+        )}
+  
+        {phones.length === 0 ? (
+          <p style={{ gridColumn: '1 / -1', textAlign: 'center', width: '100%' }}>
+            No phones available.
+          </p>
+        ) : (
+          phones.map((phone) => (
             <li key={phone._id} className="phone-item">
               <Link to={`/phone/${phone._id}`} className="phone-item-info-link">
                 <div className="phone-item-info">
@@ -115,7 +116,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
                   </div>
                 </div>
               </Link>
-
+  
               {!isLoading && isAdmin && (
                 <div className="phone-item-actions">
                   <button onClick={() => handleEditClick(phone)} className="edit-button">
@@ -127,11 +128,12 @@ const PhoneList = ({ openAddPhoneForm }) => {
                 </div>
               )}
             </li>
-          ))}
-        </ul>
-      )}
+          ))
+        )}
+      </ul>
     </div>
   );
+  
 };
 
 export default PhoneList;

@@ -423,7 +423,7 @@ const PhoneDetails = () => {
                   alt={phone.name}
                 />
                 <h4>{phone.name}</h4>
-                <p>৳{phone.price}</p>
+                <p>${phone.price}</p>
               </div>
             </a>
           ))

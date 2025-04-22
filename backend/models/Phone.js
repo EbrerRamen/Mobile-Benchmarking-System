@@ -67,7 +67,7 @@ phoneSchema.virtual('valueScore').get(function () {
     storageScore;
 
   const price = this.price || 1;
-  return Number((specScore / price).toFixed(2));
+  return Number(((specScore / price) * 100).toFixed(2));
 });
 
 phoneSchema.set('toObject', { virtuals: true });
