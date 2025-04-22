@@ -75,12 +75,30 @@ exports.deletePhone = async (req, res) => {
 // Get All Phones (with search, filter, sort)
 exports.getPhones = async (req, res) => {
   try {
-    const { search, brand, sort } = req.query;
+    const {
+      search,
+      brand,
+      sort,
+      minPrice,
+      maxPrice,
+      minRam,
+      minStorage,
+      minBattery,
+      minRefreshRate,
+      minCamera,
+      os,
+      network,
+      // sortByValueScore,
+    } = req.query;
+
     const query = {};
 
-    // Search by phone name
+    // Search by name or processor
     if (search) {
-      query.name = { $regex: search, $options: 'i' };
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { 'features.processor.name': { $regex: search, $options: 'i' } },
+      ];
     }
 
     // Filter by brand
@@ -88,21 +106,68 @@ exports.getPhones = async (req, res) => {
       query.brand = { $regex: brand, $options: 'i' };
     }
 
-    let phonesQuery = Phone.find(query);
-
-    // Sort by price
-    if (sort === 'asc') {
-      phonesQuery = phonesQuery.sort({ price: 1 });
-    } else if (sort === 'desc') {
-      phonesQuery = phonesQuery.sort({ price: -1 });
+    // Filter by price range
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = Number(minPrice);
+      if (maxPrice) query.price.$lte = Number(maxPrice);
     }
 
+    // Filter by minimum RAM
+    if (minRam) {
+      query['features.memory.ram'] = { $gte: Number(minRam) };
+    }
+
+    // Filter by minimum Storage
+    if (minStorage) {
+      query['features.memory.storage'] = { $gte: Number(minStorage) };
+    }
+
+    // Filter by battery capacity
+    if (minBattery) {
+      query['features.battery.capacity'] = { $gte: Number(minBattery) };
+    }
+
+    // Filter by display refresh rate
+    if (minRefreshRate) {
+      query['features.display.refreshRate'] = { $gte: Number(minRefreshRate) };
+    }
+
+    // Filter by camera quality (main camera)
+    if (minCamera) {
+      query['features.camera.main'] = { $gte: Number(minCamera) };
+    }
+
+    // Filter by OS
+    if (os) {
+      query['features.os'] = { $regex: os, $options: 'i' };
+    }
+
+    // Filter by network type (like 5G, 4G)
+    if (network) {
+      const networks = Array.isArray(network) ? network : [network];
+      query.$or = networks.map((net) => ({
+        'features.network': { $regex: new RegExp(net, 'i') }
+      }));
+    }
+
+    let phonesQuery = Phone.find(query);
+
+    // Sorting
+    if (sort) {
+      phonesQuery = phonesQuery.sort({ price: sort === 'asc' ? 1 : -1 });
+    }
+
+
     const phones = await phonesQuery.lean({ virtuals: true });
+
+
     res.status(200).json(phones);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 
 // Get Phone Details
