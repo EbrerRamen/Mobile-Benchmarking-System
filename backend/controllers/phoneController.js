@@ -384,7 +384,10 @@ exports.benchmarkPhones = async (req, res) => {
         camera: `Main: ${phoneA.features?.camera?.main} MP, UltraWide: ${phoneA.features?.camera?.ultraWide || 'N/A'} MP, Front: ${phoneA.features?.camera?.front || 'N/A'} MP`,
         chargingSpeed: phoneA.features?.battery?.chargingSpeed || 'N/A',
         cores: phoneA.features?.processor?.cores || 'N/A',
-        clockSpeed: phoneA.features?.processor?.clockSpeed || 'N/A'
+        clockSpeed: phoneA.features?.processor?.clockSpeed || 'N/A',
+        performanceScore: phoneA.features?.processor?.benchmarkScore || 'N/A',
+        price: phoneA.price || 'N/A',
+
       },
       phoneB: {
         name: phoneB.name,
@@ -398,7 +401,10 @@ exports.benchmarkPhones = async (req, res) => {
         camera: `Main: ${phoneB.features?.camera?.main} MP, UltraWide: ${phoneB.features?.camera?.ultraWide || 'N/A'} MP, Front: ${phoneB.features?.camera?.front || 'N/A'} MP`,
         chargingSpeed: phoneB.features?.battery?.chargingSpeed || 'N/A',
         cores: phoneB.features?.processor?.cores || 'N/A',
-        clockSpeed: phoneB.features?.processor?.clockSpeed || 'N/A'
+        clockSpeed: phoneB.features?.processor?.clockSpeed || 'N/A',
+        performanceScore: phoneB.features?.processor?.benchmarkScore || 'N/A',
+        price: phoneB.price || 'N/A',
+
       },
       verdict: winner ? `${winner.name} wins` : 'It’s a tie!',
       winner: winner ? { _id: winner._id, name: winner.name } : null,

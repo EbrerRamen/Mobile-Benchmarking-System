@@ -106,11 +106,13 @@
 }
 
 .image-comparison img {
-  max-width: 220px;
-  height: auto;
+  width: 220px;
+  height: 300px; 
+  object-fit: contain; 
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); */
   transition: transform 0.2s ease;
+  background-color: #ffffff; 
 }
 
 .image-comparison img:hover {
@@ -154,7 +156,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-.verdict-box.phone-a {
+/* .verdict-box.phone-a {
   border-left: 6px solid #007bff;
 }
 
@@ -164,7 +166,7 @@
 
 .tie {
     border-left: 6px solid #FFC107;
-  }
+  } */
 
   .benchmark-analysis {
     margin-top: 2rem;

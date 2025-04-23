@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import axios from 'axios';
 import './Benchmark.css';
 
@@ -27,25 +28,32 @@ const Benchmark = () => {
     }
   };
 
+  const options = phones.map(phone => ({
+    value: phone._id,
+    label: phone.name
+  }));
+
   return (
     <div className="benchmark-page">
       <h2>Phone Benchmark</h2>
   
       <div className="benchmark-selectors">
-        <select value={phoneA} onChange={(e) => setPhoneA(e.target.value)}>
-          <option value="">Select Phone A</option>
-          {phones.map(phone => (
-            <option key={phone._id} value={phone._id}>{phone.name}</option>
-          ))}
-        </select>
-  
-        <select value={phoneB} onChange={(e) => setPhoneB(e.target.value)}>
-          <option value="">Select Phone B</option>
-          {phones.map(phone => (
-            <option key={phone._id} value={phone._id}>{phone.name}</option>
-          ))}
-        </select>
-  
+        <Select
+          options={options}
+          value={options.find(option => option.value === phoneA)}
+          onChange={(selected) => setPhoneA(selected?.value || '')}
+          placeholder="Select Phone A"
+          isClearable
+        />
+
+        <Select
+          options={options}
+          value={options.find(option => option.value === phoneB)}
+          onChange={(selected) => setPhoneB(selected?.value || '')}
+          placeholder="Select Phone B"
+          isClearable
+        />
+
         <button onClick={handleCompare}>Compare</button>
       </div>
   
@@ -88,6 +96,16 @@ const Benchmark = () => {
               </tr>
             </thead>
             <tbody>
+            <tr>
+              <td>Price</td>
+              <td>{`$${result.phoneA.price}`}</td>
+              <td>{`$${result.phoneB.price}`}</td>
+            </tr>
+            <tr>
+              <td>Performance Score</td>
+              <td>{result.phoneA.performanceScore}</td>
+              <td>{result.phoneB.performanceScore}</td>
+            </tr>
               <tr>
                 <td>Processor</td>
                 <td>{result.phoneA.processor}</td>
@@ -137,10 +155,10 @@ const Benchmark = () => {
           </table>
   
           {result.verdict && (
-  <div className={`verdict-box ${result.verdict === 'It’s a tie!' ? 'tie' : (result.winner._id === phoneA ? 'phone-a' : 'phone-b')}`}>
-    🏆 {result.verdict}
-  </div>
-)}
+            <div className={`verdict-box ${result.verdict === 'It’s a tie!' ? 'tie' : (result.winner._id === phoneA ? 'phone-a' : 'phone-b')}`}>
+              🏆 {result.verdict}
+            </div>
+          )}
   
           {result.analysis && result.winner && (
             <div className="benchmark-analysis">
