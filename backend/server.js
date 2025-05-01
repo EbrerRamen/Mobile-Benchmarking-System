@@ -11,7 +11,7 @@ const notificationRoutes = require('./routes/notificationRoutes')
 const FaqRoutes = require('./routes/FaqRoutes');
 
 dotenv.config(); // Loads variables from .env
-connectDB(); // Connects to MongoDB
+connectDB(); 
 
 // App setup
 const app = express();
