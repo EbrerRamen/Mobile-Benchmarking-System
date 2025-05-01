@@ -20,10 +20,12 @@ import ValueForMoney from './components/ValueForMoney';
 import Wishlist from './components/Wishlist'
 import Notifications from './components/Notifications'
 import Benchmark from './components/Benchmark';
+import FaqPage from './components/FaqPage';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import './App.css';
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 
 function AppLayout() {
   const [isAddPhoneFormOpen, setIsAddPhoneFormOpen] = useState(false);
@@ -99,6 +101,7 @@ function AppLayout() {
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/benchmark" element={<Benchmark />} />
+            <Route path="/faq" element={<FaqPage />} />
           </Routes>
         </div>
       </div>

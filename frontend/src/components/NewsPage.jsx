@@ -1,4 +1,5 @@
 import React from 'react';
+import './News.css'; // Import the CSS file
 
 const NewsPage = () => {
     const newsItems = [
@@ -23,19 +24,18 @@ const NewsPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-100 py-10 px-4">
-            <h1 className="text-3xl font-bold text-center mb-10 text-gray-800"> Latest Phone News</h1>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        
+        <div className="news-page">
+            <h1 className="news-title">Latest Phone News</h1>
+            
+            <div className="news-grid">
                 {newsItems.map((item, index) => (
-                    <div key={index} className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                        <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
-                        <div className="p-5">
-                            <h5 className="text-xl font-semibold mb-2 text-gray-800">{item.title}</h5>
-                            <p className="text-gray-600 mb-4">{item.text}</p>
-                            <a href={item.link} className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                                Read More
-                            </a>
+                    <div key={index} className="news-item">
+                        <img src={item.image} alt={item.title} className="news-image" />
+                        <div className="news-content">
+                            <h5 className="news-item-title">{item.title}</h5>
+                            <p className="news-item-text">{item.text}</p>
+                            <a href={item.link} className="read-more-btn">Read More</a>
                         </div>
                     </div>
                 ))}

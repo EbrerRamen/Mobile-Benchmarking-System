@@ -24,6 +24,7 @@ const Navbar = ({ onOpenPhoneFinder }) => {
         <Link to="/wishlist">Wishlist</Link>
         <Link to="/notifications">Notifications {count > 0 && <span className="badge">{count}</span>}</Link>
         <Link to="/benchmark">Benchmark</Link>
+        <Link to="/faq">FAQs</Link> 
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </div>
     </nav>
