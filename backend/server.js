@@ -11,17 +11,11 @@ const notificationRoutes = require('./routes/notificationRoutes')
 const FaqRoutes = require('./routes/FaqRoutes');
 
 dotenv.config(); // Loads variables from .env
-connectDB(); 
+connectDB(); // Connects to MongoDB
 
 // App setup
 const app = express();
-app.use(cors(
-    {
-        origin: ["https://mobile-benchmarking-system-frontend.vercel.app"],
-        methods: ["POST", "GET", "PUT", "DELETE"],
-        credentials: true
-    }
-)); // Allows frontend apps to access this backend
+app.use(cors()); // Allows frontend apps to access this backend
 app.use(express.json()); // Parse incoming JSON requests automatically
 
 app.use('/api/phones', phoneRoutes);
