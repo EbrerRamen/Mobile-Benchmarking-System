@@ -15,7 +15,13 @@ connectDB(); // Connects to MongoDB
 
 // App setup
 const app = express();
-app.use(cors()); // Allows frontend apps to access this backend
+app.use(cors(
+    {
+        origin: ["mobile-benchmarking-system-backend.vercel.app"],
+        methods: ["POST", "GET", "PUT", "DELETE"],
+        credentials: true
+    }
+)); // Allows frontend apps to access this backend
 app.use(express.json()); // Parse incoming JSON requests automatically
 
 app.use('/api/phones', phoneRoutes);
