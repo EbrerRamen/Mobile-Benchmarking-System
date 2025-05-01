@@ -17,7 +17,7 @@ connectDB(); // Connects to MongoDB
 const app = express();
 app.use(cors(
     {
-        origin: ["mobile-benchmarking-system-backend.vercel.app"],
+        origin: ["https://mobile-benchmarking-system-frontend.vercel.app"],
         methods: ["POST", "GET", "PUT", "DELETE"],
         credentials: true
     }
