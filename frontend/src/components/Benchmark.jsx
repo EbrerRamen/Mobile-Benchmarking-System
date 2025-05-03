@@ -10,10 +10,10 @@ const Benchmark = () => {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:1080/api/phones') // Ensure this path is correct
+    axios.get('http://localhost:1080/api/phones') 
       .then(res => {
-        console.log('Phones fetched:', res.data); // Log the data
-        setPhones(res.data); // Directly update the phones list
+        console.log('Phones fetched:', res.data); 
+        setPhones(res.data); 
       })
       .catch(err => console.error('Error fetching phones:', err));
   }, []);

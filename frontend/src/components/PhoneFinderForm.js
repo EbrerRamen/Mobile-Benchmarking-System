@@ -5,7 +5,6 @@ const PhoneFinderForm = ({ isOpen, onClose, onSearch }) => {
   const [search, setSearch] = useState('');
   const [brand, setBrand] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  // const [sortByValueScore, setSortByValueScore] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [minRam, setMinRam] = useState('');
@@ -75,11 +74,6 @@ const PhoneFinderForm = ({ isOpen, onClose, onSearch }) => {
             <option value="desc">Highest to Lowest</option>
           </select>
 
-          {/* <select value={sortByValueScore} onChange={(e) => setSortByValueScore(e.target.value)}>
-            <option value="">Sort by Value Score</option>
-            <option value="asc">Lowest to Highest</option>
-            <option value="desc">Highest to Lowest</option>
-          </select> */}
 
           <button type="submit">Find</button>
         </form>

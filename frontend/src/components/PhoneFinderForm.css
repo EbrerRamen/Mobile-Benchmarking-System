@@ -121,8 +121,7 @@
   color: #1f1f2e;
 }
 
-/* Removed unnecessary side-by-side styles */
 .range-inputs,
 .flex-group {
-  display: contents; /* Neutralizes layout override */
+  display: contents; 
 }

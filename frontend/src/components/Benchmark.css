@@ -110,7 +110,6 @@
   height: 300px; 
   object-fit: contain; 
   border-radius: 12px;
-  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); */
   transition: transform 0.2s ease;
   background-color: #ffffff; 
 }
@@ -156,17 +155,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-/* .verdict-box.phone-a {
-  border-left: 6px solid #007bff;
-}
 
-.verdict-box.phone-b {
-  border-left: 6px solid #28a745;
-}
-
-.tie {
-    border-left: 6px solid #FFC107;
-  } */
 
   .benchmark-analysis {
     margin-top: 2rem;

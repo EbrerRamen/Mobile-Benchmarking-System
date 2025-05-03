@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './TrendingPhones.css'; // 👈 import your CSS file
+import './TrendingPhones.css'; 
 
 const TrendingPhones = () => {
   const [trendingPhones, setTrendingPhones] = useState([]);

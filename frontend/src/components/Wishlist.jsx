@@ -33,7 +33,7 @@ export default function Wishlist() {
       {items.length > 0 ? (
         <div className="wishlist-grid">
           {items
-           .filter(w => w.phone)         // ← only keep entries with a phone object
+           .filter(w => w.phone)         
            .map(w => (
             <div key={w._id} className="wishlist-card">
               <Link to={`/phone/${w.phone._id}`}>

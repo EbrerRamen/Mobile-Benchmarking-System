@@ -1,4 +1,3 @@
-// src/hooks/useAdminStatus.js
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 

@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './style.css';
-import { Link, useNavigate } from 'react-router-dom'; // 🟢 import useNavigate
+import { Link, useNavigate } from 'react-router-dom'; 
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // 🟢 create navigate function
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log("Logged in Successfully");
-            navigate('/home'); // 🟢 redirect to home page
+            navigate('/home'); 
         } catch (err) {
             console.log(err);
             alert("Login failed. Please check your email and password.");
