@@ -37,4 +37,4 @@ services:
     staticPublishPath: ./frontend/build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://mobile-benchmarking-backend.onrender.com 
+        value: https://mobile-benchmarking-system-backend.onrender.com 
