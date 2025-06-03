@@ -1,12 +1,7 @@
-
 const express = require('express');
-const admin = require('firebase-admin');
+const admin = require('../config/firebase');
 
 const router = express.Router();
-
-admin.initializeApp({
-  credential: admin.credential.cert(require('./serviceAccountKey.json')), 
-});
 
 // Set admin claim for a user
 router.post('/setAdmin/:uid', async (req, res) => {
