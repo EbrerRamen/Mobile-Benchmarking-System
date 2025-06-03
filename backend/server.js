@@ -1,8 +1,17 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const connectDB = require('./config/db');
 
+// Load environment variables first
+dotenv.config();
+
+// Check for required environment variables
+if (!process.env.MONGO_URI) {
+  console.error('Error: MONGO_URI is not defined in environment variables');
+  process.exit(1);
+}
+
+const connectDB = require('./config/db');
 const phoneRoutes = require('./routes/phoneRoutes');
 const ratingRoutes = require('./routes/ratingRoutes');
 const adminRoutes = require('./routes/adminRoutes')
@@ -11,8 +20,8 @@ const notificationRoutes = require('./routes/notificationRoutes')
 const FaqRoutes = require('./routes/FaqRoutes');
 const newsRoutes = require('./routes/newsRoutes');
 
-dotenv.config(); // Loads variables from .env
-connectDB(); // Connects to MongoDB
+// Connect to MongoDB
+connectDB();
 
 // App setup
 const app = express();
