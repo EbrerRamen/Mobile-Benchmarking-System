@@ -70,14 +70,6 @@ function AppLayout() {
         onSearch={handlePhoneSearch}
       />
 
-      {!isLoading && isAdmin && (
-        <>
-          {location.pathname === '/news' && (
-            <button onClick={openAddNewsForm}>Add News</button>
-          )}
-        </>
-      )}
-
       {isAddPhoneFormOpen && (
         <AddPhoneForm isOpen={isAddPhoneFormOpen} closeModal={closeAddPhoneForm} />
       )}
@@ -122,7 +114,6 @@ function App() {
         <Route path="/valueformoney" element={<ValueForMoney />} />
 
 
-        {/* Protected + layout routes */}
         <Route path="/*" element={<AppLayout />} />
       </Routes>
     </Router>

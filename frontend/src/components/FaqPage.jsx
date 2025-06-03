@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getAuth } from 'firebase/auth';
 import './FaqPage.css';
 
 const FaqPage = () => {
@@ -6,21 +8,34 @@ const FaqPage = () => {
   const [newQuestion, setNewQuestion] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
   const [message, setMessage] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Load FAQs from localStorage on component mount
   useEffect(() => {
-    const storedFaqs = JSON.parse(localStorage.getItem('faqs'));
-    if (storedFaqs) {
-      setFaqs(storedFaqs);
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+      user.getIdTokenResult().then(token => {
+        setIsAdmin(token.claims.admin === true);
+      });
     }
   }, []);
 
-  // Save FAQs to localStorage whenever they change
   useEffect(() => {
-    if (faqs.length > 0) {
-      localStorage.setItem('faqs', JSON.stringify(faqs));
+    fetchFaqs();
+  }, []);
+
+  const fetchFaqs = async () => {
+    try {
+      const response = await axios.get('http://localhost:1080/api/faqs');
+      setFaqs(response.data);
+      setLoading(false);
+    } catch (err) {
+      console.error('Error fetching FAQs:', err);
+      setMessage('Failed to load FAQs');
+      setLoading(false);
     }
-  }, [faqs]);
+  };
 
   const handleQuestionChange = (e) => {
     setNewQuestion(e.target.value);
@@ -30,65 +45,94 @@ const FaqPage = () => {
     setNewAnswer(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isAdmin) {
+      setMessage('Only admins can add FAQs');
+      return;
+    }
+
     if (newQuestion && newAnswer) {
-      const newFaq = {
-        question: newQuestion,
-        answer: newAnswer,
-      };
-      const updatedFaqs = [...faqs, newFaq];
-      setFaqs(updatedFaqs);
-      setNewQuestion('');
-      setNewAnswer('');
-      setMessage('FAQ added successfully!');
+      try {
+        await axios.post('http://localhost:1080/api/faqs', {
+          question: newQuestion,
+          answer: newAnswer
+        });
+        setNewQuestion('');
+        setNewAnswer('');
+        setMessage('FAQ added successfully!');
+        fetchFaqs(); // Refresh the FAQ list
+      } catch (err) {
+        console.error('Error adding FAQ:', err);
+        setMessage('Failed to add FAQ');
+      }
     } else {
       setMessage('Please fill in both fields.');
     }
   };
 
+  const handleDelete = async (id) => {
+    if (!isAdmin) {
+      setMessage('Only admins can delete FAQs');
+      return;
+    }
+
+    try {
+      await axios.delete(`http://localhost:1080/api/faqs/${id}`);
+      setMessage('FAQ deleted successfully!');
+      fetchFaqs(); // Refresh the FAQ list
+    } catch (err) {
+      console.error('Error deleting FAQ:', err);
+      setMessage('Failed to delete FAQ');
+    }
+  };
+
+  if (loading) return <div className="custom-faq-page"><h2>Loading FAQs...</h2></div>;
+
   return (
     <div className="custom-faq-page">
       <h2 className="custom-faq-title">Frequently Asked Questions</h2>
 
-      {/* Display existing FAQs */}
-      <div className="custom-faq-list">
-        {faqs.map((faq, index) => (
-          <div key={index} className="custom-faq-item">
-            <div className="custom-faq-question">{faq.question}</div>
-            <div className="custom-faq-answer">{faq.answer}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Display the "Post Your Question and Answer" form */}
-      <div className="custom-faq-form">
-        <h3>Post Your Question and Answer</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="custom-form-group">
-            <label htmlFor="newQuestion">Your Question</label>
+      {isAdmin && (
+        <form onSubmit={handleSubmit} className="faq-form">
+          <div className="form-group">
             <input
               type="text"
-              id="newQuestion"
               value={newQuestion}
               onChange={handleQuestionChange}
-              placeholder="Enter your question here"
+              placeholder="Enter your question"
               required
             />
           </div>
-          <div className="custom-form-group">
-            <label htmlFor="newAnswer">Your Answer</label>
+          <div className="form-group">
             <textarea
-              id="newAnswer"
               value={newAnswer}
               onChange={handleAnswerChange}
-              placeholder="Enter your answer here"
+              placeholder="Enter your answer"
               required
             />
           </div>
-          <button type="submit" className="custom-submit-button">Submit FAQ</button>
+          <button type="submit" className="submit-button">Add FAQ</button>
         </form>
-        {message && <p className="custom-faq-message">{message}</p>}
+      )}
+
+      {message && <div className="message">{message}</div>}
+
+      <div className="custom-faq-list">
+        {faqs.map((faq) => (
+          <div key={faq._id} className="custom-faq-item">
+            <div className="custom-faq-question">{faq.question}</div>
+            <div className="custom-faq-answer">{faq.answer}</div>
+            {isAdmin && (
+              <button
+                onClick={() => handleDelete(faq._id)}
+                className="delete-button"
+              >
+                Delete
+              </button>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,125 +1,149 @@
-
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(30, 30, 30, 0.6);
-    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
-    backdrop-filter: blur(4px);
-  }
-  
-  .modal-overlay.open {
-    display: flex;
-  }
-  
-  .news-form-modal {
-    background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
-    border-radius: 16px;
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 550px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.4s ease-in-out;
-  }
-  
-  .news-form-modal h2 {
-    margin-bottom: 1.8rem;
-    color: #2c3e50;
-    font-size: 2rem;
-    font-weight: 700;
+    z-index: 1000;
+}
+
+.news-form-modal {
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 600px;
+    max-width: 95%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.news-form-modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .news-form {
+    color: #333;
+}
+
+.news-form {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-  }
-  
-  .form-group {
+    gap: 20px;
+}
+
+.form-group {
     display: flex;
     flex-direction: column;
-  }
-  
-  .form-group label {
+    gap: 10px;
+}
+
+.form-group label {
     font-weight: 600;
-    margin-bottom: 0.4rem;
-    color: #34495e;
     font-size: 1rem;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    padding: 0.85rem 1.1rem;
-    border: 1px solid #dcdde1;
-    border-radius: 10px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
     font-size: 1rem;
-    font-family: 'Segoe UI', sans-serif;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    resize: none;
-    background-color: #fff;
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
     outline: none;
-  }
-  
-  .form-actions {
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.message {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #2d3748;
+}
+
+.form-actions {
     display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  
-  .form-actions button {
-    padding: 0.75rem 1.6rem;
-    font-size: 1rem;
-    font-weight: 600;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submit-button {
+    flex: 1;
+    padding: 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    font-family: 'Segoe UI', sans-serif;
-  }
-  
-  .form-actions button[type="submit"] {
-    background: linear-gradient(to right, #3498db, #2980b9);
+    background-color: #28a745;
     color: white;
-  }
-  
-  .form-actions button[type="submit"]:hover {
-    background: linear-gradient(to right, #2980b9, #2471a3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #218838;
     transform: translateY(-2px);
-  }
-  
-  .cancel-button {
-    background-color: #e74c3c;
+}
+
+.cancel-button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #dc3545;
     color: white;
-  }
-  
-  .cancel-button:hover {
-    background-color: #c0392b;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+    background-color: #c82333;
     transform: translateY(-2px);
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.96);
+}
+
+@media (max-width: 768px) {
+    .news-form-modal {
+        padding: 15px;
+        width: 95%;
     }
-  
-    to {
-      opacity: 1;
-      transform: scale(1);
+
+    .news-form {
+        gap: 15px;
     }
-  }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 10px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .submit-button,
+    .cancel-button {
+        width: 100%;
+    }
+}
   

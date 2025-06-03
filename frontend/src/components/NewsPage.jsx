@@ -1,45 +1,130 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getAuth } from 'firebase/auth';
+import AddNewsForm from './AddNewsForm';
 import './News.css'; // Import the CSS file
 
 const NewsPage = () => {
-    const newsItems = [
-        {
-            title: 'Acer returns to smartphones with Super ZX and Super ZX Pro',
-            text: 'The Acer smartphone brand is back with two newly announced phones. Say hello to the Acer Super ZX and Super ZX Pro - two affordable devices made in India by Indikal Technologies.',
-            image: 'https://fdn.gsmarena.com/imgroot/news/25/04/acer-super-zx-series-ofic/inline/-1200/gsmarena_001.jpg',
-            link: 'https://www.gsmarena.com/acer_launches_super_zx_and_super_zx_pro-news-67407.php',
-        },
-        {
-            title: 'Nvidia announces RTX 5060 and 5060 Ti graphics cards',
-            text: 'Nvidia today announced the RTX 5060 and the RTX 5060 Ti, which are the entry-level offerings in the companys 50-series graphics.',
-            image: 'https://fdn.gsmarena.com/imgroot/news/25/04/nvidia-5060/inline/-1200/gsmarena_002.jpg',
-            link: 'https://www.gsmarena.com/nvidia_announces_rtx_5060_and_5060_ti_graphics_cards-news-67405.php',
-        },
-        {
-            title: 'Google Pixel 9 First Look',
-            text: 'Pixel 9 may come with a new design and improved Tensor chip.',
-            image: 'https://via.placeholder.com/400x200',
-            link: '#',
-        },
-    ];
+    const [newsItems, setNewsItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [isAddNewsFormOpen, setIsAddNewsFormOpen] = useState(false);
+    const [editingNews, setEditingNews] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (user) {
+            user.getIdTokenResult().then(token => {
+                setIsAdmin(token.claims.admin === true);
+            });
+        }
+    }, []);
+
+    const fetchNews = async () => {
+        try {
+            const response = await axios.get('http://localhost:1080/api/news');
+            setNewsItems(response.data);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch news');
+            setLoading(false);
+            console.error('Error fetching news:', err);
+        }
+    };
+
+    useEffect(() => {
+        fetchNews();
+    }, []);
+
+    const handleAddNews = () => {
+        setEditingNews(null);
+        setIsAddNewsFormOpen(true);
+    };
+
+    const handleEditNews = (news) => {
+        setEditingNews(news);
+        setIsAddNewsFormOpen(true);
+    };
+
+    const handleDeleteNews = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this news article?')) return;
+        
+        try {
+            await axios.delete(`http://localhost:1080/api/news/${id}`);
+            setMessage('News deleted successfully!');
+            fetchNews();
+        } catch (err) {
+            console.error('Error deleting news:', err);
+            setMessage('Failed to delete news');
+        }
+    };
+
+    const handleCloseModal = () => {
+        setIsAddNewsFormOpen(false);
+        setEditingNews(null);
+        fetchNews();
+    };
+
+    if (loading) return <div className="news-page"><h1 className="news-title">Loading news...</h1></div>;
+    if (error) return <div className="news-page"><h1 className="news-title">{error}</h1></div>;
 
     return (
-        
         <div className="news-page">
-            <h1 className="news-title">Latest Phone News</h1>
+            <div className="news-header">
+                <h1 className="news-title">Latest Phone News</h1>
+                {isAdmin && (
+                    <button 
+                        onClick={handleAddNews}
+                        className="add-news-button"
+                    >
+                        Add News
+                    </button>
+                )}
+            </div>
+            
+            {message && <div className="news-message">{message}</div>}
             
             <div className="news-grid">
-                {newsItems.map((item, index) => (
-                    <div key={index} className="news-item">
-                        <img src={item.image} alt={item.title} className="news-image" />
+                {newsItems.map((item) => (
+                    <div key={item._id} className="news-item">
+                        <img src={item.imageUrl} alt={item.title} className="news-image" />
                         <div className="news-content">
                             <h5 className="news-item-title">{item.title}</h5>
-                            <p className="news-item-text">{item.text}</p>
-                            <a href={item.link} className="read-more-btn">Read More</a>
+                            <p className="news-item-text">{item.summary}</p>
+                            <div className="news-actions">
+                                <a href={item.sourceLink} className="read-more-btn" target="_blank" rel="noopener noreferrer">Read More</a>
+                                {isAdmin && (
+                                    <div className="admin-actions">
+                                        <button 
+                                            onClick={() => handleEditNews(item)}
+                                            className="edit-button"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button 
+                                            onClick={() => handleDeleteNews(item._id)}
+                                            className="delete-button"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
+
+            {isAddNewsFormOpen && (
+                <AddNewsForm 
+                    isOpen={isAddNewsFormOpen} 
+                    closeModal={handleCloseModal}
+                    editingNews={editingNews}
+                />
+            )}
         </div>
     );
 };

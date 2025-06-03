@@ -1,106 +1,123 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddNewsForm.css';
 
-const AddNewsForm = ({ isOpen, closeModal }) => {
-    const [newsData, setNewsData] = useState({
+const AddNewsForm = ({ isOpen, closeModal, editingNews }) => {
+    const [formData, setFormData] = useState({
         title: '',
         summary: '',
         imageUrl: '',
-        sourceLink: '',
+        sourceLink: ''
     });
+    const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        if (editingNews) {
+            setFormData({
+                title: editingNews.title,
+                summary: editingNews.summary,
+                imageUrl: editingNews.imageUrl,
+                sourceLink: editingNews.sourceLink
+            });
+        } else {
+            setFormData({
+                title: '',
+                summary: '',
+                imageUrl: '',
+                sourceLink: ''
+            });
+        }
+    }, [editingNews]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setNewsData((prev) => ({
+        setFormData(prev => ({
             ...prev,
-            [name]: value,
+            [name]: value
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:1080/api/news/add', newsData);
-            if (res.status === 201) {
-                setNewsData({
-                    title: '',
-                    summary: '',
-                    imageUrl: '',
-                    sourceLink: '',
-                });
-                closeModal();
+            if (editingNews) {
+                await axios.put(`http://localhost:1080/api/news/${editingNews._id}`, formData);
+                setMessage('News updated successfully!');
+            } else {
+                await axios.post('http://localhost:1080/api/news', formData);
+                setMessage('News added successfully!');
             }
+            setTimeout(() => {
+                closeModal();
+            }, 1500);
         } catch (err) {
-            console.error('Error adding news:', err);
-            alert('Failed to add news');
+            console.error('Error saving news:', err);
+            setMessage('Failed to save news');
         }
     };
 
-    const handleCancel = () => {
-        setNewsData({
-            title: '',
-            summary: '',
-            imageUrl: '',
-            sourceLink: '',
-        });
-        closeModal();
-    };
+    if (!isOpen) return null;
 
     return (
-        <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>
-            <div className="news-form-modal">
-                <h2>Add News Article</h2>
+        <div className="modal-overlay" onClick={closeModal}>
+            <div className="news-form-modal" onClick={(e) => e.stopPropagation()}>
+                <h2>{editingNews ? 'Edit News' : 'Add News'}</h2>
+                {message && <div className="message">{message}</div>}
                 <form onSubmit={handleSubmit} className="news-form">
                     <div className="form-group">
-                        <label htmlFor="title">News Title</label>
+                        <label htmlFor="title">Title</label>
                         <input
                             type="text"
                             id="title"
                             name="title"
-                            value={newsData.title}
+                            value={formData.title}
                             onChange={handleChange}
                             required
+                            placeholder="Enter news title"
                         />
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="summary">Summary</label>
                         <textarea
                             id="summary"
                             name="summary"
-                            value={newsData.summary}
+                            value={formData.summary}
                             onChange={handleChange}
                             required
+                            placeholder="Enter news summary"
                         />
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="imageUrl">Image URL</label>
                         <input
-                            type="text"
+                            type="url"
                             id="imageUrl"
                             name="imageUrl"
-                            value={newsData.imageUrl}
+                            value={formData.imageUrl}
                             onChange={handleChange}
+                            required
+                            placeholder="Enter image URL"
                         />
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="sourceLink">Source Link</label>
                         <input
-                            type="text"
+                            type="url"
                             id="sourceLink"
                             name="sourceLink"
-                            value={newsData.sourceLink}
+                            value={formData.sourceLink}
                             onChange={handleChange}
-                            placeholder="https://example.com/article"
+                            required
+                            placeholder="Enter source URL"
                         />
                     </div>
-
                     <div className="form-actions">
-                        <button type="submit">Submit News</button>
-                        <button type="button" onClick={handleCancel} className="cancel-button">Cancel</button>
+                        <button type="submit" className="submit-button">
+                            {editingNews ? 'Update News' : 'Add News'}
+                        </button>
+                        <button type="button" onClick={closeModal} className="cancel-button">
+                            Cancel
+                        </button>
                     </div>
                 </form>
             </div>

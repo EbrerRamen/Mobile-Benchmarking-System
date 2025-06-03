@@ -29,13 +29,15 @@ export default function Wishlist() {
 
   return (
     <div className="wishlist-container">
-      <h2>Your Wishlist</h2>
+      <div className="wishlist-header">
+        <h2 className="wishlist-title">Your Wishlist</h2>
+      </div>
       {items.length > 0 ? (
-        <div className="wishlist-grid">
+        <ul className="wishlist-grid">
           {items
            .filter(w => w.phone)         
            .map(w => (
-            <div key={w._id} className="wishlist-card">
+            <li key={w._id} className="wishlist-card">
               <Link to={`/phone/${w.phone._id}`}>
                 <img
                   src={w.phone.imageUrls?.[0] || 'https://via.placeholder.com/150'}
@@ -53,11 +55,13 @@ export default function Wishlist() {
               >
                 Remove
               </button>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : (
-        <p>No items in your wishlist.</p>
+        <div className="wishlist-empty">
+          <p>No items in your wishlist.</p>
+        </div>
       )}
     </div>
   )

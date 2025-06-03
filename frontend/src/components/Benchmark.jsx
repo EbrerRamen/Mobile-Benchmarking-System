@@ -155,14 +155,14 @@ const Benchmark = () => {
           </table>
   
           {result.verdict && (
-            <div className={`verdict-box ${result.verdict === 'It’s a tie!' ? 'tie' : (result.winner._id === phoneA ? 'phone-a' : 'phone-b')}`}>
+            <div className={`verdict-box ${result.verdict === 'It\'s a tie!' ? 'tie' : (result.winner._id === phoneA ? 'phone-a' : 'phone-b')}`}>
               🏆 {result.verdict}
             </div>
           )}
   
-          {result.analysis && result.winner && (
+          {result.analysis && (
             <div className="benchmark-analysis">
-              <h4>Why {result.winner.name} wins:</h4>
+              <h4>{result.verdict === 'It\'s a tie!' ? 'Analysis' : `Why ${result.winner.name} wins:`}</h4>
               <ul>
                 {result.analysis.map((point, index) => (
                   <li key={index}>{point}</li>
