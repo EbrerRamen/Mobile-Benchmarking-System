@@ -387,7 +387,6 @@ exports.benchmarkPhones = async (req, res) => {
         clockSpeed: phoneA.features?.processor?.clockSpeed || 'N/A',
         performanceScore: phoneA.features?.processor?.benchmarkScore || 'N/A',
         price: phoneA.price || 'N/A',
-
       },
       phoneB: {
         name: phoneB.name,
@@ -404,11 +403,10 @@ exports.benchmarkPhones = async (req, res) => {
         clockSpeed: phoneB.features?.processor?.clockSpeed || 'N/A',
         performanceScore: phoneB.features?.processor?.benchmarkScore || 'N/A',
         price: phoneB.price || 'N/A',
-
       },
-      verdict: winner ? `${winner.name} wins` : 'It’s a tie!',
+      verdict: winner ? `${winner.name} wins` : 'It\'s a tie!',
       winner: winner ? { _id: winner._id, name: winner.name } : null,
-      analysis
+      analysis: winner ? analysis : ['Both phones have similar overall performance.']
     });
 
   } catch (err) {

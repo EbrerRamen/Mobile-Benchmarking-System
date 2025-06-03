@@ -9,13 +9,17 @@ const adminRoutes = require('./routes/adminRoutes')
 const wishlistRoutes = require('./routes/wishlistRoutes')
 const notificationRoutes = require('./routes/notificationRoutes')
 const FaqRoutes = require('./routes/FaqRoutes');
+const newsRoutes = require('./routes/newsRoutes');
 
 dotenv.config(); // Loads variables from .env
 connectDB(); // Connects to MongoDB
 
 // App setup
 const app = express();
-app.use(cors()); // Allows frontend apps to access this backend
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://mobile-benchmarking-frontend.onrender.com'],
+  credentials: true
+}));
 app.use(express.json()); // Parse incoming JSON requests automatically
 
 app.use('/api/phones', phoneRoutes);
@@ -24,7 +28,10 @@ app.use('/api/admin', adminRoutes)
 app.use('/api/wishlist', wishlistRoutes)
 app.use('/api/notifications', notificationRoutes)
 app.use('/api/faqs', FaqRoutes);
+app.use('/api/news', newsRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 1080;
-app.listen(PORT, () => console.log(`Server running on port ${PORT} 🚀`)); // Activates the server
+const port = process.env.PORT || 1080;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
