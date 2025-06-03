@@ -25,7 +25,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import './App.css';
 
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:1080';
 
 function AppLayout() {
   const [isAddPhoneFormOpen, setIsAddPhoneFormOpen] = useState(false);
