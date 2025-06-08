@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { getAuth } from 'firebase/auth';
 import './FaqPage.css';
 
@@ -27,7 +27,7 @@ const FaqPage = () => {
 
   const fetchFaqs = async () => {
     try {
-      const response = await axios.get('http://localhost:1080/api/faqs');
+      const response = await axios.get('/api/faqs');
       setFaqs(response.data);
       setLoading(false);
     } catch (err) {
@@ -54,7 +54,7 @@ const FaqPage = () => {
 
     if (newQuestion && newAnswer) {
       try {
-        await axios.post('http://localhost:1080/api/faqs', {
+        await axios.post('/api/faqs', {
           question: newQuestion,
           answer: newAnswer
         });
@@ -78,7 +78,7 @@ const FaqPage = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:1080/api/faqs/${id}`);
+      await axios.delete(`/api/faqs/${id}`);
       setMessage('FAQ deleted successfully!');
       fetchFaqs(); // Refresh the FAQ list
     } catch (err) {

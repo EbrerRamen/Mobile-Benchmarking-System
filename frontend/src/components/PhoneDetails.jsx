@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api/axios';
 import { getAuth } from 'firebase/auth';
 import './PhoneDetails.css';
 
@@ -36,7 +36,7 @@ const PhoneDetails = () => {
     }
 
     try {
-      await axios.post('http://localhost:1080/api/ratings/add', {
+      await axios.post('/api/ratings/add', {
         phone: phoneId,
         user: user.uid,
         ratings: {
@@ -66,7 +66,7 @@ const PhoneDetails = () => {
 
   const fetchAverageRatings = useCallback(async () => {
     try {
-      const res = await axios.get(`http://localhost:1080/api/ratings/${phoneId}/average`);
+      const res = await axios.get(`/api/ratings/${phoneId}/average`);
       setAverageRatings(res.data);
     } catch (err) {
       setAverageRatings(null);
@@ -82,7 +82,7 @@ const PhoneDetails = () => {
     }
 
     try {
-      const res = await axios.get(`http://localhost:1080/api/ratings/check/${phoneId}/${user.uid}`);
+      const res = await axios.get(`/api/ratings/check/${phoneId}/${user.uid}`);
       setHasRated(res.data.hasRated);
     } catch (err) {
       console.error("Error checking if rated:", err);
@@ -92,7 +92,7 @@ const PhoneDetails = () => {
   useEffect(() => {
     const fetchPhone = async () => {
       try {
-        const res = await axios.get(`http://localhost:1080/api/phones/${phoneId}`);
+        const res = await axios.get(`/api/phones/${phoneId}`);
         setPhone(res.data);
         setLoading(false);
       } catch (err) {
