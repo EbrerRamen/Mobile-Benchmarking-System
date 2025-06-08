@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { getAuth } from 'firebase/auth'
 import { Link } from 'react-router-dom'
 import './Wishlist.css'
@@ -11,7 +11,7 @@ export default function Wishlist() {
     const user = getAuth().currentUser
     if (!user) return
     axios
-      .get('http://localhost:1080/api/wishlist', { params: { user: user.uid } })
+      .get('/api/wishlist', { params: { user: user.uid } })
       .then(res => setItems(res.data))
       .catch(console.error)
   }, [])
@@ -19,7 +19,7 @@ export default function Wishlist() {
   const handleRemove = async (id) => {
     if (!window.confirm('Remove this item from wishlist?')) return
     try {
-      await axios.delete(`http://localhost:1080/api/wishlist/${id}`)
+      await axios.delete(`/api/wishlist/${id}`)
       setItems(prev => prev.filter(i => i._id !== id))
     } catch (err) {
       console.error('Remove failed', err)

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { Link } from 'react-router-dom';
 import './TrendingPhones.css'; 
 
@@ -10,7 +10,7 @@ const ValueForMoney = () => {
   useEffect(() => {
     const fetchValuePhones = async () => {
       try {
-        const res = await axios.get('http://localhost:1080/api/phones/top-value');
+        const res = await axios.get('/api/phones/top-value');
         setPhones(res.data);
       } catch (error) {
         console.error('Failed to fetch value-for-money phones:', error);

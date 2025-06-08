@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { getAuth } from 'firebase/auth'
 import './Notifications.css'
 
@@ -10,14 +10,14 @@ export default function Notifications() {
     const user = getAuth().currentUser
     if (!user) return
     axios
-      .get('http://localhost:1080/api/notifications', { params: { user: user.uid } })
+      .get('/api/notifications', { params: { user: user.uid } })
       .then(res => setNotes(res.data))
       .catch(console.error)
   }, [])
 
   const markRead = async (id) => {
     try {
-      await axios.put(`http://localhost:1080/api/notifications/${id}/read`)
+      await axios.put(`/api/notifications/${id}/read`)
       setNotes(n => n.map(x => x._id === id ? { ...x, read: true } : x))
     } catch (err) {
       console.error('Failed to mark notification as read:', err)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import axios from 'axios';
+import axios from '../api/axios';
 import './Benchmark.css';
 
 const Benchmark = () => {
@@ -10,7 +10,7 @@ const Benchmark = () => {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:1080/api/phones') 
+    axios.get('/api/phones') 
       .then(res => {
         console.log('Phones fetched:', res.data); 
         setPhones(res.data); 
@@ -20,7 +20,7 @@ const Benchmark = () => {
 
   const handleCompare = () => {
     if (phoneA && phoneB && phoneA !== phoneB) {
-      axios.get(`http://localhost:1080/api/phones/benchmark?phoneAId=${phoneA}&phoneBId=${phoneB}`)
+      axios.get(`/api/phones/benchmark?phoneAId=${phoneA}&phoneBId=${phoneB}`)
         .then(res => setResult(res.data))
         .catch(err => console.error('Benchmark error:', err));
     } else {
