@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { getAuth } from 'firebase/auth';
 import AddNewsForm from './AddNewsForm';
 import './News.css'; // Import the CSS file
@@ -25,7 +25,7 @@ const NewsPage = () => {
 
     const fetchNews = async () => {
         try {
-            const response = await axios.get('http://localhost:1080/api/news');
+            const response = await axios.get('/api/news');
             setNewsItems(response.data);
             setLoading(false);
         } catch (err) {
@@ -53,7 +53,7 @@ const NewsPage = () => {
         if (!window.confirm('Are you sure you want to delete this news article?')) return;
         
         try {
-            await axios.delete(`http://localhost:1080/api/news/${id}`);
+            await axios.delete(`/api/news/${id}`);
             setMessage('News deleted successfully!');
             fetchNews();
         } catch (err) {

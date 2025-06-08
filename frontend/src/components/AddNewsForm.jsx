@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import './AddNewsForm.css';
 
 const AddNewsForm = ({ isOpen, closeModal, editingNews }) => {
@@ -41,10 +41,10 @@ const AddNewsForm = ({ isOpen, closeModal, editingNews }) => {
         e.preventDefault();
         try {
             if (editingNews) {
-                await axios.put(`http://localhost:1080/api/news/${editingNews._id}`, formData);
+                await axios.put(`/api/news/${editingNews._id}`, formData);
                 setMessage('News updated successfully!');
             } else {
-                await axios.post('http://localhost:1080/api/news', formData);
+                await axios.post('/api/news', formData);
                 setMessage('News added successfully!');
             }
             setTimeout(() => {
