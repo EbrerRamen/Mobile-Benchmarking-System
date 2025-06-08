@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { Link } from 'react-router-dom';
 import EditPhoneForm from './EditPhoneForm';
 import useAdminStatus from '../hooks/useAdminStatus';
@@ -20,7 +20,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
   const fetchPhones = async (filters = {}) => {
     try {
       const params = new URLSearchParams(filters).toString();
-      const res = await axios.get(`http://localhost:1080/api/phones?${params}`);
+      const res = await axios.get(`/api/phones?${params}`);
       setPhones(res.data);
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this phone?')) return;
     try {
-      await axios.delete(`http://localhost:1080/api/phones/${id}`);
+      await axios.delete(`/api/phones/${id}`);
       fetchPhones();
     } catch (err) {
       console.error(err);
