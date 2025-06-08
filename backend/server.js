@@ -31,6 +31,11 @@ app.use(cors({
 }));
 app.use(express.json()); // Parse incoming JSON requests automatically
 
+// Add a root route handler
+app.get('/', (req, res) => {
+  res.json({ message: 'Mobile Benchmarking System API is running' });
+});
+
 app.use('/api/phones', phoneRoutes);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/admin', adminRoutes)
