@@ -1,6 +1,12 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const dns = require("dns")
+
+dns.setServers([
+  '1.1.1.1',
+  '8.8.8.8'
+])
 
 // Load environment variables first
 dotenv.config();
