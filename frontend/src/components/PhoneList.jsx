@@ -24,7 +24,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
       setPhones(res.data);
     } catch (err) {
       console.error(err);
-      alert('Failed to fetch phones');
+      alert('Please wait a moment for the page to load the phones. This web app is hosted on Render’s free tier, so it may take 30–60 seconds to wake up.');
     }
   };
 
@@ -66,13 +66,13 @@ const PhoneList = ({ openAddPhoneForm }) => {
           closeModal={handleCloseModal}
         />
       )}
-  
+
       <div className="finder-button-container">
         <button onClick={() => setIsFinderOpen(true)} className="finder-button">
           🔍 Open Phone Finder
         </button>
       </div>
-  
+
       {isFinderOpen && (
         <PhoneFinderForm
           isOpen={isFinderOpen}
@@ -83,7 +83,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
           }}
         />
       )}
-  
+
       <ul className="phone-list">
         {!isLoading && isAdmin && (
           <li className="phone-item">
@@ -94,11 +94,10 @@ const PhoneList = ({ openAddPhoneForm }) => {
             </div>
           </li>
         )}
-  
+
         {phones.length === 0 ? (
           <p style={{ gridColumn: '1 / -1', textAlign: 'center', width: '100%' }}>
-            No phones available.
-          </p>
+            Please wait a moment for the page to load the phones. This web app is hosted on Render’s free tier, so it may take 30–60 seconds to wake up.          </p>
         ) : (
           phones.map((phone) => (
             <li key={phone._id} className="phone-item">
@@ -116,7 +115,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
                   </div>
                 </div>
               </Link>
-  
+
               {!isLoading && isAdmin && (
                 <div className="phone-item-actions">
                   <button onClick={() => handleEditClick(phone)} className="edit-button">
@@ -133,7 +132,7 @@ const PhoneList = ({ openAddPhoneForm }) => {
       </ul>
     </div>
   );
-  
+
 };
 
 export default PhoneList;
