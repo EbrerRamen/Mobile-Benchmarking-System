@@ -3,6 +3,15 @@
 ## Overview
 Mobile Benchmarking System is a full‑stack web application for discovering, comparing, and tracking smartphones by performance and value. It aggregates device specs and community ratings, highlights trending phones, and helps users find the best value for money.
 
+## 📸 Screenshots
+
+![Home Screen](https://imgur.com/Ub07rXS.png)
+![Phone](https://imgur.com/8answnE.png)
+![Phone Details](https://imgur.com/CC0D7rm.png)
+![Benchmarking](https://imgur.com/792vvbl.png)
+![Comparison](https://imgur.com/xs14BZM.png)
+![Winner](https://imgur.com/ek6w2Tb.png)
+
 ## Key Features
 - Trending phones and value‑for‑money recommendations
 - Detailed phone pages with specs, averages, and user ratings
