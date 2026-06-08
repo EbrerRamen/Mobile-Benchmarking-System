@@ -1,4 +1,4 @@
-# Mobile Benchmarking System
+# Mobile Benchmarking System [Live Demo](https://mobile-benchmarking-frontend.onrender.com)
 
 ## Overview
 Mobile Benchmarking System is a full‑stack web application for discovering, comparing, and tracking smartphones by performance and value. It aggregates device specs and community ratings, highlights trending phones, and helps users find the best value for money.
